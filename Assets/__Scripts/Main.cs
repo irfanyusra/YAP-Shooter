@@ -5,19 +5,19 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
 
-    public static Main S;
+    static public Main S;
 
     //Set in inspector
     public GameObject[] prefabEnemies;
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
 
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
 
     private void Awake()
     {
         S = this;
-        bndCheck = GetComponent<BoundsCheck>();
+        _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
     }
 
@@ -34,10 +34,10 @@ public class Main : MonoBehaviour
 
         //Set initial position
         Vector3 pos = Vector3.zero;
-        float xMin = -bndCheck.camWidth + enemyPadding;
-        float xMax = bndCheck.camWidth - enemyPadding;
+        float xMin = -_bndCheck.camWidth + enemyPadding;
+        float xMax = _bndCheck.camWidth - enemyPadding;
         pos.x = Random.Range(xMin, xMax);
-        pos.y = bndCheck.camHeight + enemyPadding;
+        pos.y = _bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
