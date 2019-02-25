@@ -10,23 +10,23 @@ public class Enemy_2 : Enemy
     public float waveWidth = 4;
     public float waveRotY = 45;
 
-    private float x0;
-    private float birthTime;
+    private float _x0;
+    private float _birthTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        x0 = pos.x;
-        birthTime = Time.time;   
+        _x0 = pos.x;
+        _birthTime = Time.time;   
     }
 
     public override void Move()
     {
         Vector3 tempPos = pos;
-        float age = Time.time - birthTime;
+        float age = Time.time - _birthTime;
         float theta = Mathf.PI * 2 * age / waveFrequency;
         float sin = Mathf.Sin(theta);
-        tempPos.x = x0 + waveWidth * sin;
+        tempPos.x = _x0 + waveWidth * sin;
         pos = tempPos;
 
         Vector3 rot = new Vector3(0, sin * waveRotY, 0);

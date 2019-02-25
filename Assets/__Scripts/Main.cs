@@ -5,7 +5,7 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
 
-    static public Main S;
+    public static Main S;
 
     //Set in inspector
     public GameObject[] prefabEnemies;

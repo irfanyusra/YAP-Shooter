@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
 
-	static public Hero S;
+	public static Hero S;
 
     //Set in inspector
 	public float speed = 30;
