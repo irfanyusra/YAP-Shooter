@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
-        //Random.seed = System.DateTime.Now.Millisecond;
         boolValue = (Random.value > 0.5f);
     }
 
