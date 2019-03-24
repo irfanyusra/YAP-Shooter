@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
         if (bndCheck != null && bndCheck.offDown)
         {
-            Destroy(gameObject);
+            if (bndCheck.offDown|| bndCheck.offLeft||bndCheck.offRight) Destroy(gameObject);
         }
     }
 
