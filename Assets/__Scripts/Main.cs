@@ -35,8 +35,22 @@ public class Main : MonoBehaviour
 
         //Set initial position
         Vector3 pos = Vector3.zero;
-        float xMin = -_bndCheck.camWidth + enemyPadding;
-        float xMax = _bndCheck.camWidth - enemyPadding;
+
+        float xMin;
+        float xMax;
+
+        if (go.CompareTag("Enemy_2"))
+        {
+            xMin = -_bndCheck.camWidth + enemyPadding + 6f;
+            xMax = _bndCheck.camWidth - enemyPadding - 6f;
+        }
+        else
+        {
+            xMin = -_bndCheck.camWidth + enemyPadding;
+            xMax = _bndCheck.camWidth - enemyPadding;
+        }
+
+
         pos.x = Random.Range(xMin, xMax);
         pos.y = _bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;

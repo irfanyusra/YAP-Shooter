@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     void Update() {
         Move();
 
-        if (bndCheck != null && bndCheck.offDown)
+        if (bndCheck != null)
         {
             if (bndCheck.offDown|| bndCheck.offLeft||bndCheck.offRight) Destroy(gameObject);
         }
