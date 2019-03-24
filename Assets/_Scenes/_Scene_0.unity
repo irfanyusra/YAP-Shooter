@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -316,6 +316,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 7747707191794007974, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707191794007974, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
     - target: {fileID: 7747707191794007973, guid: eb3f644a527f04f57b16abb5fb414792,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -370,6 +380,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707191583551435, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707191583551435, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707191825444050, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707191825444050, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707192009831003, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707192009831003, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707192547663376, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707192547663376, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747707192324783802, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb3f644a527f04f57b16abb5fb414792, type: 3}

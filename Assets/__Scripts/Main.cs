@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -41,5 +42,15 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+    }
+    public void DelayedRestart (float delay)
+    {
+        // invoke the restart method
+        Invoke("Restart", delay);
+    }
+    public void Restart()
+    {
+        // reload _Scene_0 to restart game
+        SceneManager.LoadScene("_Scene_0");
     }
 }
