@@ -31,13 +31,15 @@ public class Hero : MonoBehaviour
     // weaponfiredelegate field named firedelegate
     public WeaponFireDelegate fireDelegate;
 
-	void Awake() {
+
+    void Awake() {
 		if (S == null) {
 			S = this;
 		} else {
 			Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S");
 		}
        //fireDelegate += TempFire;
+      
 
 	}
 
@@ -68,6 +70,7 @@ public class Hero : MonoBehaviour
         {
             fireDelegate();
         }
+
     }
 
     //void TempFire()

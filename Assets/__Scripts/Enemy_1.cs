@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
+
     public override void Move()
     {
+        
         Vector3 tempPos = pos;
         if (boolValue)
         {

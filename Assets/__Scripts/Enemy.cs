@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
     //Set in inspector
     public float speed = 10f;
     public float fireRate = 0.3f; //seconds per shot
-    public float health = 10;
+    public float health = 20;
     public int score = 100;	//value
 
     protected BoundsCheck bndCheck;
 
     public bool boolValue = true;
+
 
     private void Awake()
     {
@@ -52,14 +54,36 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject;
-        if (otherGO.tag == "ProjectileHero")
+        switch (otherGO.tag)
         {
-            Destroy(otherGO);
-            Destroy(gameObject);
+            case "ProjectileHero":
+                Projectile p = otherGO.GetComponent<Projectile>();
+                if (!bndCheck.isOnScreen)
+                {
+                    Destroy(otherGO);
+                break;
+                }
+                health -= Main.GetWeaponDefintion(p.type).damageOnHit;
+                if (health <= 0)
+                {
+                    Destroy(this.gameObject);
+                }
+                Destroy(otherGO);
+                break;
+            default:
+                print("Enemy hit by non-ProjectileHero: " + otherGO.name);
+                break;
         }
-        else
-        {
-            print("Enemy hit by non-ProjectileHero: " + otherGO.name);
-        }
+
+
+        //if (otherGO.tag == "ProjectileHero")
+        //{
+        //    Destroy(otherGO);
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    print("Enemy hit by non-ProjectileHero: " + otherGO.name);
+        //}
     }
 }

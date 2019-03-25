@@ -30,7 +30,6 @@ public class Weapon : MonoBehaviour
     public float lastShotTime;
     private Renderer _collarRend;
 
-
     void Start()
     {
         collar = transform.Find("Collar").gameObject;
@@ -51,8 +50,26 @@ public class Weapon : MonoBehaviour
         {
             rootGO.GetComponent<Hero>().fireDelegate += Fire;
         }
+    }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            SwitchWeapon();
+        }
+    }
 
+        public void SwitchWeapon()
+    {
+        if (type == WeaponType.gun)
+            {
+                type = WeaponType.blaster;
+            }
+            else
+            {
+                type = WeaponType.gun;
+            }
     }
 
     public WeaponType type
@@ -83,6 +100,7 @@ public class Weapon : MonoBehaviour
         _collarRend.material.color = def.projectileColor;
         lastShotTime = 0;
     }
+
 
     public void Fire()
     {

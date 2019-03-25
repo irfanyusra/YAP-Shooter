@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 10
+  health: 5
   score: 100
   boolValue: 1
   waveFrequency: 2

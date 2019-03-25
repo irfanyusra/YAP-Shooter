@@ -286,14 +286,14 @@ MonoBehaviour:
     projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
       type: 3}
     projectileColor: {r: 1, g: 0.812899, b: 0, a: 1}
-    damageOnHit: 1
+    damageOnHit: 5
     delayBetweenShots: 0.1
     velocity: 30
   - type: 2
     projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
       type: 3}
     projectileColor: {r: 1, g: 0, b: 0, a: 1}
-    damageOnHit: 2
+    damageOnHit: 3
     delayBetweenShots: 0.5
     velocity: 20
   enemySpawnPerSecond: 0.5
@@ -329,7 +329,7 @@ PrefabInstance:
     - target: {fileID: 6120882611063592125, guid: eb3f644a527f04f57b16abb5fb414792,
         type: 3}
       propertyPath: _type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6120882611063592125, guid: eb3f644a527f04f57b16abb5fb414792,
         type: 3}
