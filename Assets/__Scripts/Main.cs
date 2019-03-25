@@ -22,7 +22,9 @@ public class Main : MonoBehaviour
     //UI Text 
     public Text highScoreText;
     public Text currScoreText;
-    static public int HIGH_SCORE = 0;
+    //static so that teh high score can be kept
+    static private int HIGH_SCORE = 0;
+    // pulic so that enemy can access it when it gets destroyed
     public int currScore = 0;
 
     // instance of the bounds check class
@@ -51,6 +53,7 @@ public class Main : MonoBehaviour
         }
     }
 
+
     //function that spawns enemies
     public void SpawnEnemy()
     {
@@ -60,7 +63,7 @@ public class Main : MonoBehaviour
         // instantiates the enemy corresponding to the random number
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
-        // checks to see if there is an
+        // checks to see if there is bounds
         if (go.GetComponent<BoundsCheck>() != null)
         {
             enemyDefaultPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
@@ -72,6 +75,7 @@ public class Main : MonoBehaviour
         float xMin;
         float xMax;
 
+        // compares tag too see if its enemy 2, if it is change the x min and max
         if (go.CompareTag("Enemy_2"))
         {
             xMin = -_bndCheck.camWidth + enemyDefaultPadding + 6f;
@@ -83,43 +87,53 @@ public class Main : MonoBehaviour
             xMax = _bndCheck.camWidth - enemyDefaultPadding;
         }
 
-
+        // sets the position of the new enemy
         pos.x = Random.Range(xMin, xMax);
         pos.y = _bndCheck.camHeight + enemyDefaultPadding;
         go.transform.position = pos;
-
+        // spawns the enemy
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
     }
+
+    //delayed restart function
     public void DelayedRestart (float delay)
     {
-        // invoke the restart method
+        // invoke the restart method with the delay
         Invoke("Restart", delay);
     }
+
+    // restart function
     public void Restart()
     {
-        // reload _Scene_0 to restart game
+        // if the highscrore is lower than the current score set it equal and set the highscore
         if (HIGH_SCORE < currScore)
         {
             HIGH_SCORE = currScore;
             SetHighScore();
         }
-        currScore = 0;
 
+        // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
         SetHighScore();
     }
 
-    void SetHighScore()
+    // set highscore function
+    private void SetHighScore()
     {
         highScoreText.text = "High Score: " + HIGH_SCORE;
     }
-    void SetCurrScore()
+
+    //set current score function
+    public void SetCurrScore()
     {
         currScoreText.text = "Current Score: " + currScore;
     }
+
+    //get the weapon definition in the weapon dictionary
     static public WeaponDefintion GetWeaponDefintion (WeaponType wt)
     {
         if (WEAP_DICT.ContainsKey(wt)) return (WEAP_DICT[wt]);
+        //return nothing if it doesnt have the key
         return (new WeaponDefintion());
     }
 }

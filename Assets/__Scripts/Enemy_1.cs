@@ -5,15 +5,16 @@ using UnityEngine;
 public class Enemy_1 : Enemy
 {
 
+
     public override void Move()
     {
         
         Vector3 tempPos = pos;
-        if (boolValue)
+        if (enemy1Direction) // if the enemy1 direction is positive it will move to the left
         {
             tempPos.x -= speed * Time.deltaTime;
         }
-        else
+        else // else move right
         {
             tempPos.x += speed * Time.deltaTime;
         }

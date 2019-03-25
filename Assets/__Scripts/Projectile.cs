@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private WeaponType _type;
 
+    // weapon type property
     public WeaponType type
     {
         get
@@ -22,6 +23,7 @@ public class Projectile : MonoBehaviour
         }
         set
         {
+            //calls set type functino
             SetType(value);
         }
     }
@@ -33,6 +35,7 @@ public class Projectile : MonoBehaviour
         rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -44,9 +47,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    //sets the type of projectile based on weapon type
     public void SetType(WeaponType eType)
     {
-        //set the type
         _type = eType;
         WeaponDefintion def = Main.GetWeaponDefintion(_type);
         rend.material.color = def.projectileColor;

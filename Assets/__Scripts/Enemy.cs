@@ -13,15 +13,18 @@ public class Enemy : MonoBehaviour
 
     protected BoundsCheck bndCheck;
 
-    public bool boolValue = true;
+    public bool enemy1Direction = true;
 
 
     private void Awake()
     {
+        // gets the bounds check component
         bndCheck = GetComponent<BoundsCheck>();
-        boolValue = (Random.value > 0.5f);
+        //determines whether the enemy 1 will go right or left
+        enemy1Direction = (Random.value > 0.5f);
     }
 
+    //position proerty
     public Vector3 pos
     {
         get
@@ -36,16 +39,21 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        // calls the move function 
         Move();
 
+        // gameobject is not on the screen
         if (bndCheck != null)
         {
+            // if the checks for which bounds it is off is true destroy the game object
             if (bndCheck.offDown || bndCheck.offLeft || bndCheck.offRight) Destroy(gameObject);
         }
     }
 
+    //move function
     public virtual void Move()
     {
+        // simple movement upwards
         Vector3 tempPos = pos;
         tempPos.y -= speed * Time.deltaTime;
         pos = tempPos;
@@ -54,39 +62,30 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject;
+        //checking what type of go it is 
         switch (otherGO.tag)
         {
-            case "ProjectileHero":
+            case "ProjectileHero": // if its projectilehero see if it was hit on screen or not
                 Projectile p = otherGO.GetComponent<Projectile>();
                 if (!bndCheck.isOnScreen)
                 {
                     Destroy(otherGO);
                 break;
                 }
-                health -= Main.GetWeaponDefintion(p.type).damageOnHit;
+                health -= Main.GetWeaponDefintion(p.type).damageOnHit; // health decreased by the weapons damage specs
+                // if health of the enemy is less than 0 or equal to 0
                 if (health <= 0)
                 {
-                    Main.MAIN_INSTANCE.currScore += score;
-                    Main.MAIN_INSTANCE.currScoreText.text = "Score: "+ Main.MAIN_INSTANCE.currScore;
-                    Destroy(this.gameObject);
+                    Main.MAIN_INSTANCE.currScore += score; // current score increases
+                    Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
+                    Destroy(this.gameObject); // destroys the enemy
 
                 }
-                Destroy(otherGO);
+                Destroy(otherGO); // destroy the projectile
                 break;
             default:
                 print("Enemy hit by non-ProjectileHero: " + otherGO.name);
                 break;
         }
-
-
-        //if (otherGO.tag == "ProjectileHero")
-        //{
-        //    Destroy(otherGO);
-        //    Destroy(gameObject);
-        //}
-        //else
-        //{
-        //    print("Enemy hit by non-ProjectileHero: " + otherGO.name);
-        //}
     }
 }

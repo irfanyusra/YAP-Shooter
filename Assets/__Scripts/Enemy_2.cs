@@ -20,12 +20,20 @@ public class Enemy_2 : Enemy
         _birthTime = Time.time;   
     }
 
+
     public override void Move()
     {
+        //set up temp position
         Vector3 tempPos = pos;
+
+        //get the age
         float age = Time.time - _birthTime;
+
+        //angle and sine of the angle
         float theta = Mathf.PI * 2 * age / waveFrequency;
         float sin = Mathf.Sin(theta);
+
+        // create the new position and set the position equal to the new position
         tempPos.x = _x0 + waveWidth * sin;
         pos = tempPos;
 

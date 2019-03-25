@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// enum of weaponType
 public enum WeaponType
 {
     none,
@@ -10,6 +11,7 @@ public enum WeaponType
 }
 
 [System.Serializable]
+// weapon defintion 
 public class WeaponDefintion{
     public WeaponType type = WeaponType.none;
     public GameObject projectilePrefab;
@@ -19,8 +21,10 @@ public class WeaponDefintion{
     public float velocity = 20f;
 }
 
+//weapon class
 public class Weapon : MonoBehaviour
 {
+    // parent transform of the projectiles
     static public Transform PROJECTILE_ANCHOR;
 
     [Header("Set Dynamically")] [SerializeField]
@@ -32,19 +36,19 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        collar = transform.Find("Collar").gameObject;
-        _collarRend = collar.GetComponent<Renderer>();
+        collar = transform.Find("Collar").gameObject; // gets the collar gameobject
+        _collarRend = collar.GetComponent<Renderer>(); // gets the renderer for the game object
 
         // call set type for default _type of weapontype.none
         SetType(_type);
 
-        if (PROJECTILE_ANCHOR == null)
+        if (PROJECTILE_ANCHOR == null) // if there hasnt been a parent transform
         {
-            GameObject go = new GameObject("_ProjectileAnchor");
+            GameObject go = new GameObject("_ProjectileAnchor"); // create new gameobject
             PROJECTILE_ANCHOR = go.transform;
         }
 
-        //find the fire delegate of the root game object
+        //find the fire delegate of the root game object - Hero, check it its hero and then add the method firfe to the delegate so it can call t
         GameObject rootGO = transform.root.gameObject;
         if (rootGO.GetComponent<Hero>() != null)
         {
@@ -52,8 +56,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
+        // switches the weapon if the z key is pressed
         if (Input.GetKeyDown(KeyCode.Z))
         {
             SwitchWeapon();
@@ -62,6 +67,7 @@ public class Weapon : MonoBehaviour
 
         public void SwitchWeapon()
     {
+        // changes the weapon type
         if (type == WeaponType.gun)
             {
                 type = WeaponType.blaster;
@@ -72,6 +78,7 @@ public class Weapon : MonoBehaviour
             }
     }
 
+    // property weapon type
     public WeaponType type
     {
         get {
@@ -83,41 +90,42 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    // sets the weapon type based on the definition in the main
     public void SetType( WeaponType wt)
     {
         _type = wt;
 
-        if (type == WeaponType.none)
+        if (type == WeaponType.none) // when there is no weapon type selected return nothing
         {
-            this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false); 
             return;
         }
         else
         {
-            this.gameObject.SetActive(true);
+            this.gameObject.SetActive(true); 
         }
-        def = Main.GetWeaponDefintion(_type);
-        _collarRend.material.color = def.projectileColor;
-        lastShotTime = 0;
+        def = Main.GetWeaponDefintion(_type); // gets the defintion for the type of weapon
+        _collarRend.material.color = def.projectileColor; // sets the collar to projectile colour
+        lastShotTime = 0; // set the last shot time to be 0 so that the weapon can be shot
     }
 
-
+    //fires the currently selected weapon
     public void Fire()
     {
-        // if game objcet is inactive, return
+        // if game object is inactive, return
         if (!gameObject.activeInHierarchy) return;
 
         //if it hasn't been enough time between shots, return
         if (Time.time - lastShotTime < def.delayBetweenShots) return;
 
-        Projectile p;
-        Vector3 vel = Vector3.up * def.velocity;
-        if (transform.up.y < 0)
+        Projectile p; // set up projectile
+        Vector3 vel = Vector3.up * def.velocity; // set up velocity
+        if (transform.up.y < 0) //to make sure that the shots are facing up
         {
             vel.y = -vel.y;
         }
 
-        switch (type)
+        switch (type) // depending on the type of weapon selected change the shot
         {
             case WeaponType.gun:
                 p = MakeProjectile();
@@ -139,7 +147,7 @@ public class Weapon : MonoBehaviour
 
         }
     }
-    public Projectile MakeProjectile()
+    public Projectile MakeProjectile() // making the projectiles and setting the defintion of the projectile
     {
         GameObject go = Instantiate<GameObject>(def.projectilePrefab);
         if (transform.parent.gameObject.tag == "Hero")

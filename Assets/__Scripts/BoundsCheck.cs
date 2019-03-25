@@ -18,15 +18,20 @@ public class BoundsCheck : MonoBehaviour
     public bool offRight, offLeft, offUp, offDown;
 
     void Awake() {
+        // set camera hieghts and widths
     	camHeight = Camera.main.orthographicSize;
     	camWidth = camHeight * Camera.main.aspect;
     }
 
+    // to avoid race condition set to late update
     void LateUpdate() {
+        // get the postion 
     	Vector3 pos = transform.position;
+        // set is on screen to true to correct it if it was false, set the boundary triggers to false
         isOnScreen = true;
         offRight = offUp = offDown = offLeft = false;
 
+        // if the position is off the screen at a particular point correct it
     	if (pos.x > camWidth - radius) {
     		pos.x = camWidth - radius;
             isOnScreen = false;
