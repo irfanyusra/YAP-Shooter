@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
 
-	static public Hero S;
+	static public Hero HERO_INSTANCE; // singleton hero
 
     //Set in inspector
 	public float speed = 30;
@@ -15,13 +15,8 @@ public class Hero : MonoBehaviour
     //delay for the game to restart
     public float gameRestartDelay = 2f;
 
-    //projectiles
-    public GameObject projectilePrefab;
-    public float projectileSpeed = 40f;
-
     //Set dynamically
-    [SerializeField]
-	public float _shieldLevel = 1f;
+	public float shieldLevel = 1f;
 
     // holds a reference to the last triggering game object
     private GameObject lastTriggerGo = null;
@@ -33,16 +28,13 @@ public class Hero : MonoBehaviour
 
 
     void Awake() {
-		if (S == null) {
-			S = this;
+        // since it is a singleton design, if there is more than one instance it will print out an error
+		if (HERO_INSTANCE == null) {
+			HERO_INSTANCE = this;
 		} else {
 			Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S");
-		}
-       //fireDelegate += TempFire;
-      
-
+		}    
 	}
-
   
     // Update is called once per frame
     void Update()
@@ -51,21 +43,16 @@ public class Hero : MonoBehaviour
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
 
-        // moves the hero object
+        // moves the hero object using input, speed, and time
         Vector3 pos = transform.position;
         pos.x += xAxis * speed * Time.deltaTime;
         pos.y += yAxis * speed * Time.deltaTime;
         transform.position = pos;
 
-        // adds a rotation to make movement more juciy
+        // adds rotation to make movement more juciy
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
-       
-       // //gets input to fire 
-       //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    TempFire();
-        //}
 
+        // calls the function delegate fireDelegate if the space or any jump key/button is pressed
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
@@ -73,33 +60,14 @@ public class Hero : MonoBehaviour
 
     }
 
-    //void TempFire()
-    //{
-    //    //instantiates projectile
-    //    GameObject projGO = Instantiate<GameObject>(projectilePrefab);
-    //    // sets the location to be the same location as the hero game object
-    //    projGO.transform.position = transform.position;
-    //    Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
-    //    //// moves the projectile based off velocity
-    //    //rigidB.velocity = Vector3.up * projectileSpeed;
-
-    //    Projectile proj = projGO.GetComponent<Projectile>();
-    //    proj.type = WeaponType.gun;
-    //    float tSpeed = Main.GetWeaponDefintion(proj.type).velocity;
-    //    rigidB.velocity = Vector3.up * tSpeed;
-
-    //}
-
-
+    // On the trigger collision of any object
     private void OnTriggerEnter(Collider other)
     {
-        // gets the root parent of the go of other, and prints out object name
+        // gets the root parent of the go of other and saves it to go
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
 
-        //print("Triggered: " + go.name);
-
-        // make sure it's not the same triggering game object as last time
+        // make sure it's not the same triggering game object as last time if it is do nothing
         if (go == lastTriggerGo)
         {
             return;
@@ -111,14 +79,18 @@ public class Hero : MonoBehaviour
         // checks if it is an enemy, if it is the shield level is deceased and the go is destroyed
         if (go.tag == "Enemy" || go.tag == "Enemy_2")
         {
-            _shieldLevel--;
+            // shield level decrease and destroy the enemy game object
+            shieldLevel--;
             Destroy(go);
-            if (_shieldLevel < 0)
+
+            // if the hero's shield level is less than 0 it destroys the game object and resets the game
+            if (shieldLevel < 0)
             {
+                // destroy this hero instance
                 Destroy(this.gameObject);
 
                 // restarts the game after delay using main
-                Main.S.DelayedRestart(gameRestartDelay);
+                Main.MAIN_INSTANCE.DelayedRestart(gameRestartDelay);
             }
         }
         else

@@ -66,8 +66,8 @@ public class Enemy : MonoBehaviour
                 health -= Main.GetWeaponDefintion(p.type).damageOnHit;
                 if (health <= 0)
                 {
-                    Main.S.currScore += score;
-                    Main.S.currScoreText.text = "Score: "+ Main.S.currScore;
+                    Main.MAIN_INSTANCE.currScore += score;
+                    Main.MAIN_INSTANCE.currScoreText.text = "Score: "+ Main.MAIN_INSTANCE.currScore;
                     Destroy(this.gameObject);
 
                 }

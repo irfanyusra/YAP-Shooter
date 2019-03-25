@@ -5,9 +5,11 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     [Header("Set in Inspector")]
+    // the rotations of the shield per second
     public float rotationsPerSecond = 0.1f;
 
     [Header("Set Dynamically")]
+    // level of the shield
     public int levelShown = 0;
 
     // non-public material will not appear in the inspector
@@ -24,7 +26,7 @@ public class Shield : MonoBehaviour
     void Update()
     {
         // reads the current shield
-        int currLevel = Mathf.FloorToInt(Hero.S._shieldLevel);
+        int currLevel = Mathf.FloorToInt(Hero.HERO_INSTANCE.shieldLevel);
 
         // if the current shield is different from the level shown,  change it so its the same
         if (levelShown != currLevel)
