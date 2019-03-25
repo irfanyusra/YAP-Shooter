@@ -68,18 +68,18 @@ public class Weapon : MonoBehaviour
         public void SwitchWeapon()
     {
         // changes the weapon type
-        if (type == WeaponType.gun)
+        if (typeOfWeapon == WeaponType.gun)
             {
-                type = WeaponType.blaster;
+                typeOfWeapon = WeaponType.blaster;
             }
             else
             {
-                type = WeaponType.gun;
+                typeOfWeapon = WeaponType.gun;
             }
     }
 
     // property weapon type
-    public WeaponType type
+    public WeaponType typeOfWeapon
     {
         get {
             return (_type);
@@ -95,7 +95,7 @@ public class Weapon : MonoBehaviour
     {
         _type = wt;
 
-        if (type == WeaponType.none) // when there is no weapon type selected return nothing
+        if (typeOfWeapon == WeaponType.none) // when there is no weapon type selected return nothing
         {
             this.gameObject.SetActive(false); 
             return;
@@ -125,7 +125,7 @@ public class Weapon : MonoBehaviour
             vel.y = -vel.y;
         }
 
-        switch (type) // depending on the type of weapon selected change the shot
+        switch (typeOfWeapon) // depending on the type of weapon selected change the shot
         {
             case WeaponType.gun:
                 p = MakeProjectile();
@@ -158,7 +158,7 @@ public class Weapon : MonoBehaviour
         go.transform.position = collar.transform.position;
         go.transform.SetParent(PROJECTILE_ANCHOR, true);
         Projectile p = go.GetComponent<Projectile>();
-        p.type = type;
+        p.type = typeOfWeapon;
         lastShotTime = Time.time;
         return (p);
     }
