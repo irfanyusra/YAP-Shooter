@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -10,16 +11,23 @@ public class Main : MonoBehaviour
     //dictionary
     static Dictionary<WeaponType, WeaponDefintion> WEAP_DICT;
 
+
     //Set in inspector
     public GameObject[] prefabEnemies;
     public WeaponDefintion[] weaponDefintions;
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
-
+    public Text highScoreText;
+    public Text currScoreText;
+    static public int HIGH_SCORE = 0;
+    public int currScore = 0;
     private BoundsCheck _bndCheck;
 
     private void Awake()
     {
+        SetHighScore();
+        SetCurrScore();
+        
         S = this;
         _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
@@ -36,6 +44,7 @@ public class Main : MonoBehaviour
     {
         int ndx = Random.Range(0, prefabEnemies.Length);
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
+
 
         float enemyPadding = enemyDefaultPadding;
         if (go.GetComponent<BoundsCheck>() != null)
@@ -75,9 +84,25 @@ public class Main : MonoBehaviour
     public void Restart()
     {
         // reload _Scene_0 to restart game
+        if (HIGH_SCORE < currScore)
+        {
+            HIGH_SCORE = currScore;
+            SetHighScore();
+        }
+        currScore = 0;
+
         SceneManager.LoadScene("_Scene_0");
+        SetHighScore();
     }
 
+    void SetHighScore()
+    {
+        highScoreText.text = "High Score: " + HIGH_SCORE;
+    }
+    void SetCurrScore()
+    {
+        currScoreText.text = "Current Score: " + currScore;
+    }
     static public WeaponDefintion GetWeaponDefintion (WeaponType wt)
     {
         if (WEAP_DICT.ContainsKey(wt)) return (WEAP_DICT[wt]);

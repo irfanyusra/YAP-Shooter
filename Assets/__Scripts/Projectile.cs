@@ -46,6 +46,7 @@ public class Projectile : MonoBehaviour
 
     public void SetType(WeaponType eType)
     {
+        //set the type
         _type = eType;
         WeaponDefintion def = Main.GetWeaponDefintion(_type);
         rend.material.color = def.projectileColor;

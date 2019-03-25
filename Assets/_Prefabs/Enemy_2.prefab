@@ -159,7 +159,7 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 5
-  score: 100
+  score: 50
   boolValue: 1
   waveFrequency: 2
   waveWidth: 4

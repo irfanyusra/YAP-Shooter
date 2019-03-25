@@ -269,5 +269,5 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 20
-  score: 100
+  score: 200
   boolValue: 1
