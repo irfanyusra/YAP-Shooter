@@ -20,27 +20,46 @@ public class Enemy : MonoBehaviour
         boolValue = (Random.value > 0.5f);
     }
 
-    public Vector3 pos {
-    	get {
-    		return(this.transform.position);
-    	}
-    	set {
-    		this.transform.position = value;
-    	}
+    public Vector3 pos
+    {
+        get
+        {
+            return (this.transform.position);
+        }
+        set
+        {
+            this.transform.position = value;
+        }
     }
 
-    void Update() {
+    void Update()
+    {
         Move();
 
         if (bndCheck != null)
         {
-            if (bndCheck.offDown|| bndCheck.offLeft||bndCheck.offRight) Destroy(gameObject);
+            if (bndCheck.offDown || bndCheck.offLeft || bndCheck.offRight) Destroy(gameObject);
         }
     }
 
-    public virtual void Move() {
-    	Vector3 tempPos = pos;
-    	tempPos.y -= speed * Time.deltaTime;
-    	pos = tempPos;
+    public virtual void Move()
+    {
+        Vector3 tempPos = pos;
+        tempPos.y -= speed * Time.deltaTime;
+        pos = tempPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGO = collision.gameObject;
+        if (otherGO.tag == "ProjectileHero")
+        {
+            Destroy(otherGO);
+            Destroy(gameObject);
+        }
+        else
+        {
+            print("Enemy hit by non-ProjectileHero: " + otherGO.name);
+        }
     }
 }

@@ -281,6 +281,21 @@ MonoBehaviour:
   - {fileID: 3341513401564029002, guid: 6922b96dce7ce4274ae0c58ead8260a4, type: 3}
   - {fileID: 1593554432679564764, guid: e68cce19640c645ca97d2374b5be6acb, type: 3}
   - {fileID: 5489275559022579529, guid: 6c5f381e4bda84b50a9e4b97ca045a58, type: 3}
+  weaponDefintions:
+  - type: 1
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 1, g: 0.812899, b: 0, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 0.1
+    velocity: 30
+  - type: 2
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 1, g: 0, b: 0, a: 1}
+    damageOnHit: 2
+    delayBetweenShots: 0.5
+    velocity: 20
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
 --- !u!114 &534669907
@@ -311,6 +326,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6120882611063592125, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: _type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120882611063592125, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: def.type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7747707191794007974, guid: eb3f644a527f04f57b16abb5fb414792,
         type: 3}
       propertyPath: m_Name
@@ -426,5 +451,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7747707191794007972, guid: eb3f644a527f04f57b16abb5fb414792,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb3f644a527f04f57b16abb5fb414792, type: 3}

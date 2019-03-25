@@ -12,7 +12,12 @@ public class Hero : MonoBehaviour
 	public float rollMult = -45;
 	public float pitchMult = 30;
 
+    //delay for the game to restart
     public float gameRestartDelay = 2f;
+
+    //projectiles
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 40f;
 
     //Set dynamically
     [SerializeField]
@@ -21,28 +26,67 @@ public class Hero : MonoBehaviour
     // holds a reference to the last triggering game object
     private GameObject lastTriggerGo = null;
 
+    // new delegate type 
+    public delegate void WeaponFireDelegate();
+    // weaponfiredelegate field named firedelegate
+    public WeaponFireDelegate fireDelegate;
+
 	void Awake() {
 		if (S == null) {
 			S = this;
 		} else {
 			Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S");
 		}
+       //fireDelegate += TempFire;
+
 	}
 
   
     // Update is called once per frame
     void Update()
     {
+        // gets input in up, down, left, and right controls
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
 
+        // moves the hero object
         Vector3 pos = transform.position;
         pos.x += xAxis * speed * Time.deltaTime;
         pos.y += yAxis * speed * Time.deltaTime;
         transform.position = pos;
 
+        // adds a rotation to make movement more juciy
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
+       
+       // //gets input to fire 
+       //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    TempFire();
+        //}
+
+        if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
+        {
+            fireDelegate();
+        }
     }
+
+    //void TempFire()
+    //{
+    //    //instantiates projectile
+    //    GameObject projGO = Instantiate<GameObject>(projectilePrefab);
+    //    // sets the location to be the same location as the hero game object
+    //    projGO.transform.position = transform.position;
+    //    Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+    //    //// moves the projectile based off velocity
+    //    //rigidB.velocity = Vector3.up * projectileSpeed;
+
+    //    Projectile proj = projGO.GetComponent<Projectile>();
+    //    proj.type = WeaponType.gun;
+    //    float tSpeed = Main.GetWeaponDefintion(proj.type).velocity;
+    //    rigidB.velocity = Vector3.up * tSpeed;
+
+    //}
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -62,11 +106,9 @@ public class Hero : MonoBehaviour
         lastTriggerGo = go;
 
         // checks if it is an enemy, if it is the shield level is deceased and the go is destroyed
-        if (go.tag == "Enemy")
+        if (go.tag == "Enemy" || go.tag == "Enemy_2")
         {
-            print("ENEMYYYYYYY");
             _shieldLevel--;
-            print("shield level decreased:" + _shieldLevel);
             Destroy(go);
             if (_shieldLevel < 0)
             {
