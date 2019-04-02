@@ -23,7 +23,7 @@ public class Main : MonoBehaviour
     public Text highScoreText;
     public Text currScoreText;
     //static so that teh high score can be kept
-    static private int HIGH_SCORE = 0;
+    public int highScore = 0;
     // pulic so that enemy can access it when it gets destroyed
     public int currScore = 0;
 
@@ -105,22 +105,15 @@ public class Main : MonoBehaviour
     // restart function
     public void Restart()
     {
-        // if the highscrore is lower than the current score set it equal and set the highscore
-        if (HIGH_SCORE < currScore)
-        {
-            HIGH_SCORE = currScore;
-            SetHighScore();
-        }
-
         // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
         SetHighScore();
     }
 
     // set highscore function
-    private void SetHighScore()
+    public void SetHighScore()
     {
-        highScoreText.text = "High Score: " + HIGH_SCORE;
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("highScore");
     }
 
     //set current score function

@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // variable that is class boundscheck
-    private BoundsCheck bndCheck;
-    private Renderer rend;
+    private BoundsCheck _bndCheck;
+    private Renderer _rend;
 
     [Header("Set Dynamically")]
     public Rigidbody rigid;
@@ -31,8 +31,8 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         // gets the bound check component
-        bndCheck = GetComponent<BoundsCheck>();
-        rend = GetComponent<Renderer>();
+        _bndCheck = GetComponent<BoundsCheck>();
+        _rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
     }
 
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // checks if the object is off the screen in the upper boundary
-        if (bndCheck.offUp)
+        if (_bndCheck.offUp)
         {
             // destroys the game object if it is
             Destroy(gameObject);
@@ -52,6 +52,6 @@ public class Projectile : MonoBehaviour
     {
         _type = eType;
         WeaponDefintion def = Main.GetWeaponDefintion(_type);
-        rend.material.color = def.projectileColor;
+        _rend.material.color = def.projectileColor;
     }
 }

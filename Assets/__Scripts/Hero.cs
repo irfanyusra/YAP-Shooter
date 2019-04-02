@@ -19,7 +19,7 @@ public class Hero : MonoBehaviour
 	public float shieldLevel = 1f;
 
     // holds a reference to the last triggering game object
-    private GameObject lastTriggerGo = null;
+    private GameObject _lastTriggerGo = null;
 
     // new delegate type 
     public delegate void WeaponFireDelegate();
@@ -68,13 +68,13 @@ public class Hero : MonoBehaviour
         GameObject go = rootT.gameObject;
 
         // make sure it's not the same triggering game object as last time if it is do nothing
-        if (go == lastTriggerGo)
+        if (go == _lastTriggerGo)
         {
             return;
         }
 
         // set the last triggering object to game object
-        lastTriggerGo = go;
+        _lastTriggerGo = go;
 
         // checks if it is an enemy, if it is the shield level is deceased and the go is destroyed
         if (go.tag == "Enemy" || go.tag == "Enemy_2")
