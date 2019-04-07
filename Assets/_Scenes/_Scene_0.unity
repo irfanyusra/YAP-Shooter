@@ -525,7 +525,7 @@ MonoBehaviour:
       type: 3}
     projectileColor: {r: 1, g: 0.812899, b: 0, a: 1}
     damageOnHit: 5
-    delayBetweenShots: 0.3
+    delayBetweenShots: 0.75
     velocity: 30
     letter: G
   - type: 2
@@ -533,7 +533,7 @@ MonoBehaviour:
       type: 3}
     projectileColor: {r: 1, g: 0, b: 0, a: 1}
     damageOnHit: 2.5
-    delayBetweenShots: 0.2
+    delayBetweenShots: 0.5
     velocity: 20
     letter: B
   - type: 3
@@ -552,6 +552,14 @@ MonoBehaviour:
     delayBetweenShots: 1
     velocity: 1
     letter: M
+  - type: 5
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 0.27450982, g: 0.90588236, b: 0.87332374, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 1
+    velocity: 1
+    letter: A
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
   highScoreText: {fileID: 1055434973}

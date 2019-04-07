@@ -39,6 +39,7 @@ public class Main : MonoBehaviour
         blaster,
         shield,
         movementSpeed,
+        attackSpeed
     }
 
     private void Awake()

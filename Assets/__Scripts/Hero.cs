@@ -122,6 +122,9 @@ public class Hero : MonoBehaviour
             case Main.WeaponType.movementSpeed:
                 speed += 10;
                 break;
+            case Main.WeaponType.attackSpeed:
+                Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.75f;
+                break;
             default: // nothing
                 break;
                 //if (pu.type == weapons[1].typeOfWeapon)

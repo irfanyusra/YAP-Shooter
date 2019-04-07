@@ -17,12 +17,11 @@ public class Enemy : MonoBehaviour
 
     public GameObject prefabPowerUp; // prefab for power up
     public Main.WeaponType[] powerUps = new Main.WeaponType[] { 
-    Main.WeaponType.shield, Main.WeaponType.movementSpeed }; // list of power ups avaiable
+    Main.WeaponType.shield, Main.WeaponType.movementSpeed, Main.WeaponType.attackSpeed}; // list of power ups avaiable
 
-    public int powerUpDropChance = 5;  // # out of 10 chance
+    public int powerUpDropChance = 10;  // # out of 10 chance
 
     private GameObject lastTriggerGameObject = null;
-
 
     void Awake()
     {
@@ -34,7 +33,7 @@ public class Enemy : MonoBehaviour
         int dropChance = Random.Range(0, 11); // to select if this enemy will have a drop chance
         if (dropChance <= powerUpDropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
-            int randomPowerUp = Random.Range(0, powerUps.Length); // selects the powerup from the list
+            int randomPowerUp = Random.Range(0, 3); // selects the powerup from the list 0,1
             puType = powerUps[randomPowerUp];
         }
     }
@@ -117,7 +116,7 @@ public class Enemy : MonoBehaviour
                         Main.MAIN_INSTANCE.SetHighScore();
                         Destroy(this.gameObject); // destroys the enemy
 
-                        if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed)
+                        if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed|| puType == Main.WeaponType.movementSpeed)
                         {
                             GameObject go = Instantiate(prefabPowerUp) as GameObject;
                             PowerUp pu = go.GetComponent<PowerUp>();
