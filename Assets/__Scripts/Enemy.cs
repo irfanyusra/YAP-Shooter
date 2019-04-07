@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     //Set in inspector
     public float speed = 10f;
-    public float fireRate = 0.3f; //seconds per shot
+    public float fireRate = 0.6f; //seconds per shot
     public float health = 20;
     public int score = 100; //value
     public bool enemy1Direction = true;
@@ -19,19 +19,15 @@ public class Enemy : MonoBehaviour
     public Main.WeaponType[] powerUps = new Main.WeaponType[] { 
     Main.WeaponType.shield, Main.WeaponType.movementSpeed, Main.WeaponType.attackSpeed}; // list of power ups avaiable
 
-    public int powerUpDropChance = 10;  // # out of 10 chance
-
     private GameObject lastTriggerGameObject = null;
 
     void Awake()
     {
-        // gets the bounds check component
-        bndCheck = GetComponent<BoundsCheck>();
-        //determines whether the enemy 1 will go right or left
-        enemy1Direction = (Random.value > 0.5f);
+        bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
+        enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 
-        int dropChance = Random.Range(0, 11); // to select if this enemy will have a drop chance
-        if (dropChance <= powerUpDropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
+        float dropChance = 1.0f; // to select if this enemy will have a drop chance
+        if (Random.value <= dropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
             int randomPowerUp = Random.Range(0, 3); // selects the powerup from the list 0,1
             puType = powerUps[randomPowerUp];
