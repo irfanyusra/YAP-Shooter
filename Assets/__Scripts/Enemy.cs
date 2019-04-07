@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
                         Main.MAIN_INSTANCE.SetHighScore();
                         Destroy(this.gameObject); // destroys the enemy
 
-                        if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed|| puType == Main.WeaponType.movementSpeed)
+                        if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed|| puType == Main.WeaponType.attackSpeed)
                         {
                             GameObject go = Instantiate(prefabPowerUp) as GameObject;
                             PowerUp pu = go.GetComponent<PowerUp>();
