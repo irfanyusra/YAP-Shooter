@@ -30,6 +30,17 @@ public class Main : MonoBehaviour
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
 
+    public GameObject prefabPowerUp;
+
+    public enum WeaponType
+    {
+        none, 
+        gun,
+        blaster,
+        shield,
+        movementSpeed,
+    }
+
     private void Awake()
     {
         //sets the highscore and the curr score

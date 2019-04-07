@@ -12,12 +12,14 @@ public class Enemy_2 : Enemy
 
     private float _x0;
     private float _birthTime;
-
+    
     // Start is called before the first frame update
     void Start()
     {
         _x0 = pos.x;
-        _birthTime = Time.time;   
+        _birthTime = Time.time;
+        health = 5;
+        score = 100;
     }
 
 

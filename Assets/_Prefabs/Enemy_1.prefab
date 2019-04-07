@@ -68,7 +68,11 @@ MonoBehaviour:
   fireRate: 0.3
   health: 10
   score: 100
-  boolValue: 1
+  enemy1Direction: 1
+  prefabPowerUp: {fileID: 3380328686017869100, guid: 89b6656c2b3a04f7cb7a7712f43be594,
+    type: 3}
+  powerUpFrequency: 0300000004000000
+  powerUpDropChance: 1
 --- !u!114 &3417753137973488156
 MonoBehaviour:
   m_ObjectHideFlags: 0

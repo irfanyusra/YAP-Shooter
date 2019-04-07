@@ -10,12 +10,12 @@ public class Projectile : MonoBehaviour
 
     [Header("Set Dynamically")]
     public Rigidbody rigid;
-
+    
     [SerializeField]
-    private WeaponType _type;
+    private Main.WeaponType _type;
 
     // weapon type property
-    public WeaponType type
+    public Main.WeaponType type
     {
         get
         {
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // checks if the object is off the screen in the upper boundary
-        if (_bndCheck.offUp)
+        if (_bndCheck.offUp|| _bndCheck.offLeft|| _bndCheck.offRight)
         {
             // destroys the game object if it is
             Destroy(gameObject);
@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
     }
 
     //sets the type of projectile based on weapon type
-    public void SetType(WeaponType eType)
+    public void SetType(Main.WeaponType eType)
     {
         _type = eType;
         WeaponDefintion def = Main.GetWeaponDefintion(_type);

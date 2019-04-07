@@ -253,9 +253,11 @@ MonoBehaviour:
   rollMult: -45
   pitchMult: 30
   gameRestartDelay: 2
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: 40
-  _shieldLevel: 1
+  shieldLevel: 1
+  weapons:
+  - {fileID: 0}
+  - {fileID: 6120882611063592125}
+  - {fileID: 0}
 --- !u!54 &7747707191794007975
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -605,11 +607,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7747707191794007973}
     m_Modifications:
-    - target: {fileID: 6259930711556987341, guid: d0decce361fad4508b6df361b079473d,
-        type: 3}
-      propertyPath: m_Name
-      value: Weapon
-      objectReference: {fileID: 0}
     - target: {fileID: 3836765912968308705, guid: d0decce361fad4508b6df361b079473d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -665,6 +662,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6259930711556987341, guid: d0decce361fad4508b6df361b079473d,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0decce361fad4508b6df361b079473d, type: 3}
 --- !u!4 &6528241568115219231 stripped
@@ -673,3 +675,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8045143464687435006}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6120882611063592125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4276072279876593731, guid: d0decce361fad4508b6df361b079473d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8045143464687435006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1d3a7b3c821411888f862d72f498ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

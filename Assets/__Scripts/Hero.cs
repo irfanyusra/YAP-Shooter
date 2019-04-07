@@ -93,12 +93,75 @@ public class Hero : MonoBehaviour
                 Main.MAIN_INSTANCE.DelayedRestart(gameRestartDelay);
             }
         }
+        else if(go.tag == "PowerUp")
+        {
+            AbsorbPowerUp(go);
+        }
         else
         {
             print("triggered by non-enemy: " + go.name); // if it isnt an enemy, then print that it triggered something else
         }
     }
 
+    public void AbsorbPowerUp(GameObject go)
+    {
+        PowerUp pu = go.GetComponent<PowerUp>();
+        switch (pu.type)
+        {
+            case Main.WeaponType.shield:
+                if (shieldLevel == 4)
+                {
+                    shieldLevel = 4;
+                }
+                else
+                {
+                    shieldLevel++;
+                }
+
+                break;
+            case Main.WeaponType.movementSpeed:
+                speed += 10;
+                break;
+            default: // nothing
+                break;
+                //if (pu.type == weapons[1].typeOfWeapon)
+                //{
+                //    Weapon w = GetEmptyWeaponSlot();
+                //    if (w != null)
+                //    {
+                //        w.SetType(pu.type);
+                //    }
+                //}
+                //else
+                //{
+                //    ClearWeapons();
+                //    Weapon w = GetEmptyWeaponSlot();
+
+                //}
+        }
+        pu.AbsorbedBy(this.gameObject);
+    }
+
+
+    //Weapon GetEmptyWeaponSlot()
+    //{
+    //    for (int i=0; i<weapons.Length; i++)
+    //    {
+    //        if (weapons[i].typeOfWeapon == Main.WeaponType.none)
+    //        {
+    //            return (weapons[i]);
+    //        }
+    //    }
+    //    return (null);
+    //}
+
+    //void ClearWeapons()
+    //{
+    //    foreach (Weapon w in weapons)
+    //    {
+    //        w.SetType(Main.WeaponType.none);
+    //    }
+    //}
     /*
 
     //property

@@ -281,7 +281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -225.7, y: -444.1}
+  m_AnchoredPosition: {x: -225, y: -444.1}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &310812541
@@ -525,20 +525,40 @@ MonoBehaviour:
       type: 3}
     projectileColor: {r: 1, g: 0.812899, b: 0, a: 1}
     damageOnHit: 5
-    delayBetweenShots: 0.1
+    delayBetweenShots: 0.3
     velocity: 30
+    letter: G
   - type: 2
     projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
       type: 3}
     projectileColor: {r: 1, g: 0, b: 0, a: 1}
-    damageOnHit: 3
-    delayBetweenShots: 0.5
+    damageOnHit: 2.5
+    delayBetweenShots: 0.2
     velocity: 20
+    letter: B
+  - type: 3
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 0.5529412, g: 0.89019614, b: 0.37647063, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 1
+    velocity: 1
+    letter: S
+  - type: 4
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 0.90588236, g: 0.27450982, b: 0.8792062, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 1
+    velocity: 1
+    letter: M
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
   highScoreText: {fileID: 1055434973}
   currScoreText: {fileID: 310812541}
+  highScore: 0
   currScore: 0
+  prefabPowerUp: {fileID: 0}
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,8 +614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -246.5, y: -416.7}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -225, y: -416.7}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055434973
 MonoBehaviour:

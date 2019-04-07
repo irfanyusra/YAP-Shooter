@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// enum of weaponType
-public enum WeaponType
-{
-    none,
-    gun,
-    blaster
-}
-
 [System.Serializable]
 // weapon defintion 
 public class WeaponDefintion{
-    public WeaponType type = WeaponType.none;
+    public Main.WeaponType type = Main.WeaponType.none;
     public GameObject projectilePrefab;
     public Color projectileColor = Color.white;
     public float damageOnHit = 0f;
     public float delayBetweenShots = 0f;
     public float velocity = 20f;
+    public string letter = "L";
 }
 
 //weapon class
@@ -28,7 +21,7 @@ public class Weapon : MonoBehaviour
     static public Transform PROJECTILE_ANCHOR;
 
     [Header("Set Dynamically")] [SerializeField]
-    private WeaponType _type = WeaponType.none;
+    private Main.WeaponType _type = Main.WeaponType.none;
     public WeaponDefintion def;
     public GameObject collar;
     public float lastShotTime;
@@ -68,18 +61,18 @@ public class Weapon : MonoBehaviour
         public void SwitchWeapon()
     {
         // changes the weapon type
-        if (typeOfWeapon == WeaponType.gun)
+        if (typeOfWeapon == Main.WeaponType.gun)
             {
-                typeOfWeapon = WeaponType.blaster;
+                typeOfWeapon = Main.WeaponType.blaster;
             }
             else
             {
-                typeOfWeapon = WeaponType.gun;
+                typeOfWeapon = Main.WeaponType.gun;
             }
     }
 
     // property weapon type
-    public WeaponType typeOfWeapon
+    public Main.WeaponType typeOfWeapon
     {
         get {
             return (_type);
@@ -91,19 +84,10 @@ public class Weapon : MonoBehaviour
     }
 
     // sets the weapon type based on the definition in the main
-    public void SetType( WeaponType wt)
+    public void SetType(Main.WeaponType wt)
     {
         _type = wt;
-
-        if (typeOfWeapon == WeaponType.none) // when there is no weapon type selected return nothing
-        {
-            this.gameObject.SetActive(false); 
-            return;
-        }
-        else
-        {
-            this.gameObject.SetActive(true); 
-        }
+        this.gameObject.SetActive(true); 
         def = Main.GetWeaponDefintion(_type); // gets the defintion for the type of weapon
         _collarRend.material.color = def.projectileColor; // sets the collar to projectile colour
         lastShotTime = 0; // set the last shot time to be 0 so that the weapon can be shot
@@ -127,12 +111,12 @@ public class Weapon : MonoBehaviour
 
         switch (typeOfWeapon) // depending on the type of weapon selected change the shot
         {
-            case WeaponType.gun:
+            case Main.WeaponType.gun:
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
                 break;
 
-            case WeaponType.blaster:
+            case Main.WeaponType.blaster:
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
                 // right projectile
@@ -144,7 +128,6 @@ public class Weapon : MonoBehaviour
                 p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
-
         }
     }
     public Projectile MakeProjectile() // making the projectiles and setting the defintion of the projectile
