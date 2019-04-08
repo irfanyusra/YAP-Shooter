@@ -33,10 +33,13 @@ public class Main : MonoBehaviour
     GameObject canvas;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
 
+=======
+>>>>>>> parent of 7cc054b... added 2 sounds
 =======
 >>>>>>> parent of 7cc054b... added 2 sounds
     public enum WeaponType
