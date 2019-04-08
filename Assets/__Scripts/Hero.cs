@@ -64,7 +64,7 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             launchNuke();
         }
@@ -88,6 +88,12 @@ public class Hero : MonoBehaviour
         }
     }
 
+    public void shieldDamaged()
+    {
+        shieldLevel--;
+        Main.MAIN_INSTANCE.ouchAs.Play();
+    }
+
     // On the trigger collision of any object
     private void OnTriggerEnter(Collider other)
     {
@@ -108,8 +114,7 @@ public class Hero : MonoBehaviour
         if (go.tag == "Enemy" || go.tag == "Enemy_2")
         {
             // shield level decrease and destroy the enemy game object
-            shieldLevel--;
-            Main.MAIN_INSTANCE.ouchAs.Play();
+            shieldDamaged();
             Destroy(go);
         }
         else if (go.tag == "PowerUp")
@@ -118,8 +123,7 @@ public class Hero : MonoBehaviour
         }
         else if (go.tag == "Meteor")
         {
-            shieldLevel--;
-            Main.MAIN_INSTANCE.ouchAs.Play();
+            shieldDamaged();
             StartCoroutine(ExecuteAfterTime(2));
         }
         else
@@ -135,6 +139,7 @@ public class Hero : MonoBehaviour
             // restarts the game after delay using main
             Main.MAIN_INSTANCE.DelayedRestart(gameRestartDelay);
         }
+        
     }
 
     public void AbsorbPowerUp(GameObject go)
@@ -158,7 +163,7 @@ public class Hero : MonoBehaviour
                 speed += 10;
                 break;
             case Main.WeaponType.attackSpeed:
-                if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.15f)
+                if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.25f)
                 {
                     Main.GetWeaponDefintion(Main.WeaponType.gun).delayBetweenShots *= 0.7f;
                     Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.7f;

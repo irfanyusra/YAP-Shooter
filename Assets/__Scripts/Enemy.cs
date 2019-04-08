@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float fireRate = 0.6f; //seconds per shot
     public float health = 20;
     public int score = 100; //value
+    public float showDamageDuration = 0.1f;
     public bool enemy1Direction = true;
     protected BoundsCheck bndCheck;
 
@@ -23,11 +24,25 @@ public class Enemy : MonoBehaviour
 
     private GameObject lastTriggerGameObject = null;
 
+    [Header("Set Dynamically: Enemy")]
+    public Color[] originalColors;
+    public Material[] materials;
+    public bool showingDamage = false;
+    public float damageDoneTime;
+    public bool notifiedOfDestruction = false;
+
 
     void Awake()
     {
      
         bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
+        materials = Utils.GetAllMaterials(gameObject);
+        originalColors = new Color[materials.Length];
+        for (int i = 0; i < materials.Length; i++)
+        {
+            originalColors[i] = materials[i].color;
+        }
+
         enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 
         float dropChance = 0.5f; // to select if this enemy will have a drop chance
@@ -68,6 +83,8 @@ public class Enemy : MonoBehaviour
     {
         // calls the move function 
         Move();
+
+        if (showingDamage && Time.time > damageDoneTime) UnShowDamage();
 
         // gameobject is not on the screen
         if (bndCheck != null)
@@ -110,6 +127,7 @@ public class Enemy : MonoBehaviour
         {
             case "ProjectileHero": // if its projectilehero see if it was hit on screen or not
                 Projectile p = otherGO.GetComponent<Projectile>();
+                ShowDamage();
                 if (!bndCheck.isOnScreen)
                 {
                     Destroy(otherGO);
@@ -134,11 +152,11 @@ public class Enemy : MonoBehaviour
                         Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
                         Main.MAIN_INSTANCE.SetHighScore();
 
-                        if (numEnemiesDestroyed >= 5)
+                        if (numEnemiesDestroyed >= 10)
                         {
                             numEnemiesDestroyed = 0;
                             Main.MAIN_INSTANCE.nextLevel();
-                            speed *= 1.3f;
+                            speed *= 1f + (1f/Main.MAIN_INSTANCE.level);
                         }
                         else
                         {
@@ -160,4 +178,31 @@ public class Enemy : MonoBehaviour
                 break; 
         }
     }
+
+    void ShowDamage()
+    {
+        foreach (Material m in materials)
+        {
+            if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed || puType == Main.WeaponType.nuke)
+            {
+                m.color = Main.GetWeaponDefintion(puType).projectileColor;
+            }
+            else
+            {
+                m.color = Color.red;
+            }
+        }
+        showingDamage = true;
+        damageDoneTime = Time.time + showDamageDuration;
+    }
+
+    void UnShowDamage()
+    {
+        for (int i= 0; i < materials.Length; i++)
+        {
+            materials[i].color = originalColors[i];
+        }
+        showingDamage = false;
+    }
+
 }

@@ -32,7 +32,7 @@ public class Main : MonoBehaviour
     public int highScore = 0;
     // pulic so that enemy can access it when it gets destroyed
     public int currScore = 0;
-    private int level = 1;
+    public int level = 1;
 
     GameObject canvas;
 
