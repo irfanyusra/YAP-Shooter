@@ -123,7 +123,7 @@ public class Hero : MonoBehaviour
                 speed += 10;
                 break;
             case Main.WeaponType.attackSpeed:
-                if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.15f)
+                if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.25f)
                 {
                     Main.GetWeaponDefintion(Main.WeaponType.gun).delayBetweenShots *= 0.7f;
                     Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.7f;

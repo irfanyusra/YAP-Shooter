@@ -6,14 +6,12 @@ public class Enemy : MonoBehaviour
 {
 
     //Set in inspector
-    public static float speed = 10f;
+    public float speed = 10f;
     public float fireRate = 0.6f; //seconds per shot
     public float health = 20;
     public int score = 100; //value
     public bool enemy1Direction = true;
     protected BoundsCheck bndCheck;
-
-    private static int numEnemiesDestroyed = 0;
 
     Main.WeaponType puType; // type for power up
 
@@ -30,7 +28,7 @@ public class Enemy : MonoBehaviour
         bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
         enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 
-        float dropChance = 0.7f; // to select if this enemy will have a drop chance
+        float dropChance = 1.0f; // to select if this enemy will have a drop chance
         if (Random.value <= dropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
             int randomPowerUp = Random.Range(0, 3); // selects the powerup from the list 0,1
@@ -108,7 +106,6 @@ public class Enemy : MonoBehaviour
                     if (health <= 0)
                     {
                         Destroy(this.gameObject); // destroys the enemy
-                        numEnemiesDestroyed++;
                         Main.MAIN_INSTANCE.currScore += score; // current score increases
                         if (Main.MAIN_INSTANCE.currScore >= PlayerPrefs.GetInt("highScore"))
                         {
@@ -117,22 +114,13 @@ public class Enemy : MonoBehaviour
                         Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
                         Main.MAIN_INSTANCE.SetHighScore();
 
-                        if (numEnemiesDestroyed >= 5)
+                        if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed|| puType == Main.WeaponType.attackSpeed)
                         {
-                            numEnemiesDestroyed = 0;
-                            Main.MAIN_INSTANCE.nextLevel();
-                            speed *= 1.3f;
-                        }
-                        else
-                        {
-                            if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed)
-                            {
-                                GameObject go = Instantiate(prefabPowerUp) as GameObject;
-                                PowerUp pu = go.GetComponent<PowerUp>();
-                                pu.SetType(puType);
+                            GameObject go = Instantiate(prefabPowerUp) as GameObject;
+                            PowerUp pu = go.GetComponent<PowerUp>();
+                            pu.SetType(puType);
 
-                                pu.transform.position = this.transform.position;
-                            }
+                            pu.transform.position = this.transform.position;
                         }
                     }
                 }
