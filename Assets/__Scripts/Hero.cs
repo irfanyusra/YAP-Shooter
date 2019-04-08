@@ -88,25 +88,9 @@ public class Hero : MonoBehaviour
         {
             AbsorbPowerUp(go);
         }
-        else if (go.tag == "Meteor")
-        {
-            shieldLevel--;
-            Main.MAIN_INSTANCE.ouchAs.Play();
-            StartCoroutine(ExecuteAfterTime(1));
-        }
         else
         {
             print("triggered by non-enemy: " + go.name); // if it isnt an enemy, then print that it triggered something else
-        }
-        // if the hero's shield level is less than 0 it destroys the game object and resets the game
-        if (shieldLevel < 0)
-        {
-            // destroy this hero instance
-            Destroy(this.gameObject);
-
-            // restarts the game after delay using main
-            Main.MAIN_INSTANCE.DelayedRestart(gameRestartDelay);
-        }
     }
 
     public void AbsorbPowerUp(GameObject go)
@@ -141,15 +125,7 @@ public class Hero : MonoBehaviour
 
         }
         pu.AbsorbedBy(this.gameObject);
-    }
-
-    IEnumerator ExecuteAfterTime(float time)
-    {
-        _lastTriggerGo = null;
-        yield return new WaitForSeconds(time);
-
-        // Code to execute after the delay
-    }
+}
     //Weapon GetEmptyWeaponSlot()
     //{
     //    for (int i=0; i<weapons.Length; i++)
