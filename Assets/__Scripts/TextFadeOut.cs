@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextFadeOut : MonoBehaviour
 {
-    private float fadeOutTime = 2f;
+    private float fadeOutTime = 2.5f;
 
     public void Awake()
     {

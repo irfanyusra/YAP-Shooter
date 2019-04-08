@@ -14,6 +14,7 @@ public class Main : MonoBehaviour
     //Set in inspector
     public GameObject[] prefabEnemies;
     public WeaponDefintion[] weaponDefintions;
+    public GameObject meteorPrefab;
 
     //enenmy spawning and padding
     public float enemySpawnPerSecond = 0.5f;
@@ -35,6 +36,7 @@ public class Main : MonoBehaviour
 
     GameObject canvas;
 
+    public bool meteorDir;
 
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
@@ -60,8 +62,8 @@ public class Main : MonoBehaviour
     public AudioClip blehAc;
     public AudioSource blehAs;
 
-    //public AudioClip boomAc;
-    //public AudioSource boomAs;
+    public AudioClip boomAc;
+    public AudioSource boomAs;
 
     public enum WeaponType
     {
@@ -108,7 +110,7 @@ public class Main : MonoBehaviour
         levelUpAs.clip = levelUpAc;
         ouchAs.clip = ouchAc;
         blehAs.clip = blehAc;
-        //boomAs.clip = boomAc;
+        boomAs.clip = boomAc;
 
     }
 
@@ -164,6 +166,8 @@ public class Main : MonoBehaviour
     public void Restart()
     {
         SetHighScore();
+        enemySpawnPerSecond = 0.5f;
+        Enemy.speed = 10f;
         // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
     }
@@ -177,7 +181,7 @@ public class Main : MonoBehaviour
 
     public void ShowLevelText()
     {
-        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(480, 300, 0), Quaternion.identity);
+        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(420, 300, 0), Quaternion.identity);
         SetCurrLevel();
         currLevelText.transform.SetParent(canvas.transform);
 
@@ -189,6 +193,23 @@ public class Main : MonoBehaviour
         level++;
         enemySpawnPerSecond *= 1.25f;
         ShowLevelText();
+
+        Vector3 pos = Vector3.zero;
+
+        GameObject meteor = Instantiate<GameObject>(meteorPrefab);
+
+        float yMin = -_bndCheck.camHeight;
+        float yMax = _bndCheck.camHeight;
+
+        if (meteor.GetComponent<MeteorScript>().meteorDir)
+        {
+            pos.x = -_bndCheck.camWidth;
+        } else
+        {
+            pos.x = _bndCheck.camWidth;
+        }
+        pos.y = Random.Range(yMin + 15, yMax - 15);
+        meteor.transform.position = pos;
     }
 
     // set highscore function

@@ -3,7 +3,28 @@ guid: 25fb5a89726e348608cf17afd997f719
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - meteorPrefab: {fileID: 2220854967407571780, guid: 68a6691d62ac144c092cab58ed2a0e32,
+      type: 3}
+  - NuclearBlast: {fileID: 1549226579821101286, guid: 6132ce0c1a26844608dcb6f73814742b,
+      type: 3}
+  - highScoreText: {instanceID: 0}
+  - currScoreText: {instanceID: 0}
+  - currLevelPrefab: {instanceID: 0}
+  - backgroundMusicAC: {instanceID: 0}
+  - backgroundMusicAS: {instanceID: 0}
+  - pppAc: {instanceID: 0}
+  - pppAs: {instanceID: 0}
+  - yapAc: {instanceID: 0}
+  - yapAs: {instanceID: 0}
+  - powerUpAc: {instanceID: 0}
+  - powerUpAs: {instanceID: 0}
+  - levelUpAc: {instanceID: 0}
+  - levelUpAs: {instanceID: 0}
+  - ouchAc: {instanceID: 0}
+  - ouchAs: {instanceID: 0}
+  - blehAc: {instanceID: 0}
+  - blehAs: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

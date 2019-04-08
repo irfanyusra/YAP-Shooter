@@ -30,10 +30,10 @@ public class Enemy : MonoBehaviour
         bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
         enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 
-        float dropChance = 1f; // to select if this enemy will have a drop chance
+        float dropChance = 0.5f; // to select if this enemy will have a drop chance
         if (Random.value <= dropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
-            if (Random.value <= 1f)
+            if (Random.value <= 0.2f)
             {
                 puType = Main.WeaponType.nuke;
             }

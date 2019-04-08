@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorScript : MonoBehaviour
 {
-    public float meteorHealth = 40;
+    public float meteorHealth = 100;
 
     public Vector2 rotMinMax = new Vector2(10, 80);
     public Vector2 driftMinMax = new Vector2(0.25f, 0.25f);
@@ -12,8 +12,9 @@ public class MeteorScript : MonoBehaviour
     public GameObject sphere;
     public Vector3 rotPerSecond;
 
-    //private BoundsCheck _bndCheck;
-    //private Rigidbody rigid;
+    protected BoundsCheck bndCheck;
+    public static float speed = 3f;
+    public bool meteorDir;
 
     private void Awake()
     {
@@ -22,24 +23,54 @@ public class MeteorScript : MonoBehaviour
              Random.Range(rotMinMax.x, rotMinMax.y),
              Random.Range(rotMinMax.x, rotMinMax.y));
 
-        //_bndCheck = GetComponent<BoundsCheck>();
-
-        Vector3 vel = Random.onUnitSphere;
-
-        vel.z = 0;
-        vel.Normalize();
-
-        //vel *= Random.Range(driftMinMax.x, driftMinMax.y);
-        //rigid.velocity = vel;
-
         transform.rotation = Quaternion.identity;
+        bndCheck = GetComponent<BoundsCheck>();
+        meteorDir = (Random.value <= 0.5f);
     }
     private void Update()
     {
+        Move();
         sphere.transform.rotation = Quaternion.Euler(rotPerSecond * Time.time);
         if (meteorHealth <= 0)
         {
             Destroy(gameObject);
+        }
+        if (bndCheck != null)
+        {
+            if (meteorDir)
+            {
+                if (bndCheck.offRight) Destroy(gameObject);
+            } else
+            {
+                if (bndCheck.offLeft) Destroy(gameObject);
+            }
+        }
+    }
+
+    public virtual void Move()
+    {
+        Vector3 tempPos = pos;
+
+        if (meteorDir)
+        {
+            tempPos.x += speed * Time.deltaTime;
+        } else
+        {
+            tempPos.x += speed * Time.deltaTime * -1;
+        }
+
+        pos = tempPos;
+    }
+
+    public Vector3 pos
+    {
+        get
+        {
+            return (this.transform.position);
+        }
+        set
+        {
+            this.transform.position = value;
         }
     }
 

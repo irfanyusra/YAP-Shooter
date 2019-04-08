@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2220854967407571781}
   - component: {fileID: 2220854967407571785}
   - component: {fileID: 4456855020824894871}
+  - component: {fileID: 1678866356016866626}
   m_Layer: 12
   m_Name: Meteor
   m_TagString: Meteor
@@ -126,3 +127,25 @@ MonoBehaviour:
   driftMinMax: {x: 0.25, y: 0.25}
   sphere: {fileID: 0}
   rotPerSecond: {x: 0, y: 0, z: 0}
+  meteorDir: 0
+--- !u!114 &1678866356016866626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220854967407571780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e566d718f78441b5a861d7705d19e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  keepOnScreen: 0
+  isOnScreen: 1
+  camWidth: 0
+  camHeight: 0
+  offRight: 0
+  offLeft: 0
+  offUp: 0
+  offDown: 0
