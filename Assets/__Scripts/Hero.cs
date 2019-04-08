@@ -81,6 +81,7 @@ public class Hero : MonoBehaviour
         {
             // shield level decrease and destroy the enemy game object
             shieldLevel--;
+            Main.MAIN_INSTANCE.ouchAs.Play();
             Destroy(go);
 
             // if the hero's shield level is less than 0 it destroys the game object and resets the game
@@ -105,6 +106,7 @@ public class Hero : MonoBehaviour
 
     public void AbsorbPowerUp(GameObject go)
     {
+        Main.MAIN_INSTANCE.powerUpAs.Play();
         PowerUp pu = go.GetComponent<PowerUp>();
         switch (pu.type)
         {

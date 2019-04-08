@@ -36,11 +36,26 @@ public class Main : MonoBehaviour
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
 
-    public AudioClip backgroundMusicClip;
-    public AudioSource backgroundMusicSource;
+    public AudioClip backgroundMusicAC;
+    public AudioSource backgroundMusicAS;
 
-    public AudioClip pewpewpewAC;
-    public AudioSource pewpewpewAS;
+    public AudioClip pppAc;
+    public AudioSource pppAs;
+
+    public AudioClip yapAc;
+    public AudioSource yapAs;
+
+    public AudioClip powerUpAc;
+    public AudioSource powerUpAs;
+
+    public AudioClip levelUpAc;
+    public AudioSource levelUpAs;
+
+    public AudioClip ouchAc;
+    public AudioSource ouchAs;
+
+    public AudioClip blehAc;
+    public AudioSource blehAs;
 
     public enum WeaponType
     {
@@ -77,8 +92,16 @@ public class Main : MonoBehaviour
             WEAP_DICT[def.type] = def;
         }
 
-        backgroundMusicSource.clip = backgroundMusicClip;
-        backgroundMusicSource.Play();
+        backgroundMusicAS.clip = backgroundMusicAC;
+        backgroundMusicAS.Play();
+
+        pppAs.clip = pppAc;
+        yapAs.clip = yapAc;
+        powerUpAs.clip = powerUpAc;
+        levelUpAs.clip = levelUpAc;
+        ouchAs.clip = ouchAc;
+        blehAs.clip = blehAc;
+
     }
 
     //function that spawns enemies
@@ -147,6 +170,7 @@ public class Main : MonoBehaviour
 
     public void nextLevel()
     {
+        levelUpAs.Play();
         level++;
         enemySpawnPerSecond *= 1.25f;
         ShowLevelText();

@@ -107,6 +107,7 @@ public class Enemy : MonoBehaviour
                     // if health of the enemy is less than 0 or equal to 0
                     if (health <= 0)
                     {
+                        Main.MAIN_INSTANCE.blehAs.Play();
                         Destroy(this.gameObject); // destroys the enemy
                         numEnemiesDestroyed++;
                         Main.MAIN_INSTANCE.currScore += score; // current score increases

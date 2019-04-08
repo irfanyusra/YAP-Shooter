@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        Main.MAIN_INSTANCE.pewpewpewAS.clip = Main.MAIN_INSTANCE.pewpewpewAC;
+        //Main.MAIN_INSTANCE.pppAS.clip = Main.MAIN_INSTANCE.pppAc;
 
         collar = transform.Find("Collar").gameObject; // gets the collar gameobject
         _collarRend = collar.GetComponent<Renderer>(); // gets the renderer for the game object
@@ -100,7 +100,7 @@ public class Weapon : MonoBehaviour
     //fires the currently selected weapon
     public void Fire()
     {
-        Main.MAIN_INSTANCE.pewpewpewAS.Play();
+
         // if game object is inactive, return
         if (!gameObject.activeInHierarchy) return;
 
@@ -117,11 +117,13 @@ public class Weapon : MonoBehaviour
         switch (typeOfWeapon) // depending on the type of weapon selected change the shot
         {
             case Main.WeaponType.gun:
+                Main.MAIN_INSTANCE.yapAs.Play();
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
                 break;
 
             case Main.WeaponType.blaster:
+                Main.MAIN_INSTANCE.pppAs.Play();
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
                 // right projectile
