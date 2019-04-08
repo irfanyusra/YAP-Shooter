@@ -37,8 +37,6 @@ public class Hero : MonoBehaviour
 			Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S");
 		}    
 	}
-
-
   
     // Update is called once per frame
     void Update()
@@ -62,13 +60,17 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
 
-        if (Input.GetKeyDown(KeyCode.N)) launchNuke();
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            launchNuke();
+        }
     }
 
     public void launchNuke()
     {
         if (activeNuke)
         {
+            Main.MAIN_INSTANCE.nukeBlastImage();
             GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
             foreach (GameObject go in allObjects)
             {

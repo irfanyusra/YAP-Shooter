@@ -19,6 +19,9 @@ public class Main : MonoBehaviour
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
 
+    //UI Image
+    public Image NuclearBlast;
+
     //UI Text 
     public Text highScoreText;
     public Text currScoreText;
@@ -159,6 +162,13 @@ public class Main : MonoBehaviour
         SetHighScore();
         // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
+    }
+
+    public void nukeBlastImage()
+    {
+        Image nuclearBlast = Instantiate<Image>(NuclearBlast, new Vector3(480, 700, 0), Quaternion.identity);
+        nuclearBlast.transform.SetParent(canvas.transform);
+        nuclearBlast.CrossFadeAlpha(0f, 1f, false);
     }
 
     public void ShowLevelText()

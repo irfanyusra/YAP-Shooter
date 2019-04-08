@@ -1039,6 +1039,8 @@ MonoBehaviour:
     letter: N
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
+  NuclearBlast: {fileID: 1549226579821101286, guid: 6132ce0c1a26844608dcb6f73814742b,
+    type: 3}
   highScoreText: {fileID: 1055434973}
   currScoreText: {fileID: 310812541}
   currLevelPrefab: {fileID: 2854765532763537126, guid: d9d2a0dfb9ed54375a30c5a2fbced108,
