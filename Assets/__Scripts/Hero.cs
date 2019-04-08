@@ -123,24 +123,15 @@ public class Hero : MonoBehaviour
                 speed += 10;
                 break;
             case Main.WeaponType.attackSpeed:
-                Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.75f;
+                if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.25f)
+                {
+                    Main.GetWeaponDefintion(Main.WeaponType.gun).delayBetweenShots *= 0.7f;
+                    Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.7f;
+                }
                 break;
             default: // nothing
                 break;
-                //if (pu.type == weapons[1].typeOfWeapon)
-                //{
-                //    Weapon w = GetEmptyWeaponSlot();
-                //    if (w != null)
-                //    {
-                //        w.SetType(pu.type);
-                //    }
-                //}
-                //else
-                //{
-                //    ClearWeapons();
-                //    Weapon w = GetEmptyWeaponSlot();
 
-                //}
         }
         pu.AbsorbedBy(this.gameObject);
     }

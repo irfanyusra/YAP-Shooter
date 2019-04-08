@@ -63,7 +63,6 @@ public class Main : MonoBehaviour
         }
     }
 
-
     //function that spawns enemies
     public void SpawnEnemy()
     {

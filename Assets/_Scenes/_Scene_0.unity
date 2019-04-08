@@ -560,13 +560,12 @@ MonoBehaviour:
     delayBetweenShots: 1
     velocity: 1
     letter: A
-  enemySpawnPerSecond: 0.5
+  enemySpawnPerSecond: 1
   enemyDefaultPadding: 1.5
   highScoreText: {fileID: 1055434973}
   currScoreText: {fileID: 310812541}
   highScore: 0
   currScore: 0
-  prefabPowerUp: {fileID: 0}
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0

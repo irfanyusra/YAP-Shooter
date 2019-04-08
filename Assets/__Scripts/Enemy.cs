@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour
                     // if health of the enemy is less than 0 or equal to 0
                     if (health <= 0)
                     {
+                        Destroy(this.gameObject); // destroys the enemy
                         Main.MAIN_INSTANCE.currScore += score; // current score increases
                         if (Main.MAIN_INSTANCE.currScore >= PlayerPrefs.GetInt("highScore"))
                         {
@@ -110,7 +111,6 @@ public class Enemy : MonoBehaviour
                         }
                         Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
                         Main.MAIN_INSTANCE.SetHighScore();
-                        Destroy(this.gameObject); // destroys the enemy
 
                         if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed|| puType == Main.WeaponType.attackSpeed)
                         {
