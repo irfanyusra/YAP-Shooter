@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1029,8 +1029,17 @@ MonoBehaviour:
     delayBetweenShots: 1
     velocity: 1
     letter: A
+  - type: 6
+    projectilePrefab: {fileID: 8127953433957112651, guid: ab23eb23f41934879a4848747f97dab0,
+      type: 3}
+    projectileColor: {r: 1, g: 0.9945394, b: 0, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 1
+    velocity: 1
+    letter: N
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
+  NuclearBlast: {fileID: 0}
   highScoreText: {fileID: 1055434973}
   currScoreText: {fileID: 310812541}
   currLevelPrefab: {fileID: 2854765532763537126, guid: d9d2a0dfb9ed54375a30c5a2fbced108,
