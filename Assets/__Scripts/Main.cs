@@ -139,7 +139,7 @@ public class Main : MonoBehaviour
 
     public void ShowLevelText()
     {
-        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(500, 300, 0), Quaternion.identity);
+        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(480, 300, 0), Quaternion.identity);
         SetCurrLevel();
         currLevelText.transform.SetParent(canvas.transform);
 
