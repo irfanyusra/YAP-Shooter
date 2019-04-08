@@ -36,12 +36,6 @@ public class Main : MonoBehaviour
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
 
-    public AudioClip backgroundMusicClip;
-    public AudioSource backgroundMusicSource;
-
-    public AudioClip pewpewpewAC;
-    public AudioSource pewpewpewAS;
-
     public enum WeaponType
     {
         none, 
@@ -76,9 +70,6 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
-
-        backgroundMusicSource.clip = backgroundMusicClip;
-        backgroundMusicSource.Play();
     }
 
     //function that spawns enemies
