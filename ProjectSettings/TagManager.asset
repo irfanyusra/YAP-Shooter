@@ -9,6 +9,7 @@ TagManager:
   - ProjectileHero
   - Enemy_2
   - PowerUp
+  - Meteor
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Enemy
   - HeroPorojectile
   - PowerUp
-  - 
+  - Meteor
   - 
   - 
   - 
