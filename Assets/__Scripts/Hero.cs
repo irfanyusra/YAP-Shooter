@@ -26,6 +26,8 @@ public class Hero : MonoBehaviour
     // weaponfiredelegate field named firedelegate
     public WeaponFireDelegate fireDelegate;
 
+    private bool activeNuke = false;
+
 
     void Awake() {
         // since it is a singleton design, if there is more than one instance it will print out an error
@@ -35,6 +37,8 @@ public class Hero : MonoBehaviour
 			Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S");
 		}    
 	}
+
+
   
     // Update is called once per frame
     void Update()
@@ -58,6 +62,23 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
 
+        if (Input.GetKeyDown(KeyCode.N)) launchNuke();
+    }
+
+    public void launchNuke()
+    {
+        if (activeNuke)
+        {
+            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+            foreach (GameObject go in allObjects)
+            {
+                if (go.CompareTag("Enemy") || go.CompareTag("Enemy_2"))
+                {
+                    Destroy(go);
+                }
+            }
+            activeNuke = false;
+        }
     }
 
     // On the trigger collision of any object
@@ -131,62 +152,13 @@ public class Hero : MonoBehaviour
                     Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.7f;
                 }
                 break;
+            case Main.WeaponType.nuke:
+                activeNuke = true;
+                break;
             default: // nothing
                 break;
 
         }
         pu.AbsorbedBy(this.gameObject);
     }
-
-
-    //Weapon GetEmptyWeaponSlot()
-    //{
-    //    for (int i=0; i<weapons.Length; i++)
-    //    {
-    //        if (weapons[i].typeOfWeapon == Main.WeaponType.none)
-    //        {
-    //            return (weapons[i]);
-    //        }
-    //    }
-    //    return (null);
-    //}
-
-    //void ClearWeapons()
-    //{
-    //    foreach (Weapon w in weapons)
-    //    {
-    //        w.SetType(Main.WeaponType.none);
-    //    }
-    //}
-    /*
-
-    //property
-    public float shieldLevel
-    {
-        get
-        {
-            return (_shieldLevel);
-        }
-        set
-        {
-            // if the shield is less than 0
-            print(value);
-            if (value < 0)
-            {
-                Destroy(this.gameObject);
-
-                // restarts the game after delay using main
-                Main.S.DelayedRestart(gameRestartDelay);
-            }
-            else
-            {
-                _shieldLevel = Mathf.Min(value, 4);
-            }
-
-
-        }
-
-
-    }
-   */
 }

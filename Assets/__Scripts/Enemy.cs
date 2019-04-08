@@ -30,11 +30,19 @@ public class Enemy : MonoBehaviour
         bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
         enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 
-        float dropChance = 0.7f; // to select if this enemy will have a drop chance
+        float dropChance = 1f; // to select if this enemy will have a drop chance
         if (Random.value <= dropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
-            int randomPowerUp = Random.Range(0, 3); // selects the powerup from the list 0,1
-            puType = powerUps[randomPowerUp];
+            if (Random.value <= 1f)
+            {
+                puType = Main.WeaponType.nuke;
+            }
+            else
+            {
+                int randomPowerUp = Random.Range(0, 3); // selects the powerup from the list 0,1
+                puType = powerUps[randomPowerUp];
+            }
+
         }
     }
 
@@ -126,7 +134,7 @@ public class Enemy : MonoBehaviour
                         }
                         else
                         {
-                            if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed)
+                            if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed || puType == Main.WeaponType.nuke)
                             {
                                 GameObject go = Instantiate(prefabPowerUp) as GameObject;
                                 PowerUp pu = go.GetComponent<PowerUp>();
