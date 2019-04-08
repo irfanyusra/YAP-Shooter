@@ -22,10 +22,16 @@ public class Main : MonoBehaviour
     //UI Text 
     public Text highScoreText;
     public Text currScoreText;
-    //static so that teh high score can be kept
+    public Text currLevelPrefab;
+    private Text currLevelText;
+    //static so that the high score can be kept
     public int highScore = 0;
     // pulic so that enemy can access it when it gets destroyed
     public int currScore = 0;
+    private int level = 1;
+
+    GameObject canvas;
+
 
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
@@ -42,9 +48,12 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
+        canvas = GameObject.Find("Canvas");
         //sets the highscore and the curr score
         SetHighScore();
         SetCurrScore();
+
+        ShowLevelText();
 
         //sets the main instance to this
         MAIN_INSTANCE = this;
@@ -114,9 +123,24 @@ public class Main : MonoBehaviour
     // restart function
     public void Restart()
     {
+        SetHighScore();
         // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
-        SetHighScore();
+    }
+
+    public void ShowLevelText()
+    {
+        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(500, 300, 0), Quaternion.identity);
+        SetCurrLevel();
+        currLevelText.transform.SetParent(canvas.transform);
+
+    }
+
+    public void nextLevel()
+    {
+        level++;
+        enemySpawnPerSecond *= 1.25f;
+        ShowLevelText();
     }
 
     // set highscore function
@@ -129,6 +153,11 @@ public class Main : MonoBehaviour
     public void SetCurrScore()
     {
         currScoreText.text = "Current Score: " + currScore;
+    }
+
+    public void SetCurrLevel()
+    {
+        currLevelText.text = "LEVEL " + level;
     }
 
     //get the weapon definition in the weapon dictionary
