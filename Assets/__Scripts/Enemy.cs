@@ -21,8 +21,10 @@ public class Enemy : MonoBehaviour
 
     private GameObject lastTriggerGameObject = null;
 
+
     void Awake()
     {
+     
         bndCheck = GetComponent<BoundsCheck>(); // gets the bounds check component
         enemy1Direction = (Random.value > 0.5f); //determines whether the enemy 1 will go right or left
 

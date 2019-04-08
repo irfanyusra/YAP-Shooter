@@ -27,8 +27,12 @@ public class Weapon : MonoBehaviour
     public float lastShotTime;
     private Renderer _collarRend;
 
+   
+
     void Start()
     {
+        Main.MAIN_INSTANCE.pewpewpewAS.clip = Main.MAIN_INSTANCE.pewpewpewAC;
+
         collar = transform.Find("Collar").gameObject; // gets the collar gameobject
         _collarRend = collar.GetComponent<Renderer>(); // gets the renderer for the game object
 
@@ -96,6 +100,7 @@ public class Weapon : MonoBehaviour
     //fires the currently selected weapon
     public void Fire()
     {
+        Main.MAIN_INSTANCE.pewpewpewAS.Play();
         // if game object is inactive, return
         if (!gameObject.activeInHierarchy) return;
 
