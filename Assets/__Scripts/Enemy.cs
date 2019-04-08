@@ -77,7 +77,15 @@ public class Enemy : MonoBehaviour
         tempPos.y -= speed * Time.deltaTime;
         pos = tempPos;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Meteor")
+        {
+            other.gameObject.GetComponent<MeteorScript>().damageHealth(20);
+            Main.MAIN_INSTANCE.blehAs.Play();
+            Destroy(this.gameObject);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject;
@@ -137,9 +145,9 @@ public class Enemy : MonoBehaviour
                         }
                     }
                 }
-
                 break;
-            default:
+
+                default:
                 print("Enemy hit by non-ProjectileHero: " + otherGO.name);
                 break; 
         }

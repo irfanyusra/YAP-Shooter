@@ -57,6 +57,9 @@ public class Main : MonoBehaviour
     public AudioClip blehAc;
     public AudioSource blehAs;
 
+    //public AudioClip boomAc;
+    //public AudioSource boomAs;
+
     public enum WeaponType
     {
         none, 
@@ -101,6 +104,7 @@ public class Main : MonoBehaviour
         levelUpAs.clip = levelUpAc;
         ouchAs.clip = ouchAc;
         blehAs.clip = blehAc;
+        //boomAs.clip = boomAc;
 
     }
 
