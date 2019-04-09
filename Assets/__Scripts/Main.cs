@@ -117,6 +117,25 @@ public class Main : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetHighScore();
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            resetHighScore();
+            Restart();
+        }
+    }
+
+    private void resetHighScore()
+    {
+        PlayerPrefs.SetInt("highScore", 0);
+        SetHighScore();
+    }
+
     //function that spawns enemies
     public void SpawnEnemy()
     {

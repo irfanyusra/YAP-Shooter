@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
                         Destroy(this.gameObject); // destroys the enemy
                         numEnemiesDestroyed++;
                         Main.MAIN_INSTANCE.currScore += score; // current score increases
-                        if (Main.MAIN_INSTANCE.currScore >= PlayerPrefs.GetInt("highScore"))
+                        if (Main.MAIN_INSTANCE.currScore > PlayerPrefs.GetInt("highScore"))
                         {
                             PlayerPrefs.SetInt("highScore", Main.MAIN_INSTANCE.currScore);
                             Main.MAIN_INSTANCE.SetHighScore();
@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
                         {
                             numEnemiesDestroyed = 0;
                             Main.MAIN_INSTANCE.nextLevel();
-                            speed *= 1f + (1f/Main.MAIN_INSTANCE.level);
+                            speed *= 1f + (1f/(Main.MAIN_INSTANCE.level * 2));
                         }
                         else
                         {
@@ -182,11 +182,11 @@ public class Enemy : MonoBehaviour
 
     void ShowDamage() // shows the damage on the enemy
     {
-        foreach (Material m in materials) // depending if it has a power up adjust colour
+        foreach (Material m in materials) 
         {
             if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed || puType == Main.WeaponType.nuke)
             {
-                m.color = Main.GetWeaponDefintion(puType).projectileColor;
+                m.color = Main.GetWeaponDefintion(puType).projectileColor; // depending if it has a power up adjust colour
             }
             else
             {
