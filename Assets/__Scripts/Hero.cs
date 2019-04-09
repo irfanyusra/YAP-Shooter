@@ -26,7 +26,7 @@ public class Hero : MonoBehaviour
     // weaponfiredelegate field named firedelegate
     public WeaponFireDelegate fireDelegate;
 
-    private bool activeNuke = false;
+    private bool _activeNuke = false;
 
 
     void Awake()
@@ -72,7 +72,7 @@ public class Hero : MonoBehaviour
 
     public void launchNuke() // launch nuke handles the destruction of enemies
     {
-        if (activeNuke) // will only activate if there is a nuke
+        if (_activeNuke) // will only activate if there is a nuke
         {
             Main.MAIN_INSTANCE.boomAs.Play(); // play sound
             Main.MAIN_INSTANCE.nukeBlastImage(); // apply image affect
@@ -84,7 +84,7 @@ public class Hero : MonoBehaviour
                     Destroy(go);
                 }
             }
-            activeNuke = false; // sets the nuke active to false
+            _activeNuke = false; // sets the nuke active to false
         }
     }
 
@@ -170,7 +170,7 @@ public class Hero : MonoBehaviour
                 }
                 break;
             case Main.WeaponType.nuke: // if nuke is picked up set active nuke to true
-                activeNuke = true;
+                _activeNuke = true;
                 break;
             default: // nothing
                 break;

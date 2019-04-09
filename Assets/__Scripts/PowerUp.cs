@@ -17,18 +17,18 @@ public class PowerUp : MonoBehaviour
     public Vector3 rotPerSecond; // euler rotation speed
     public float birthTime;
 
-    private Rigidbody rigid;
-    private BoundsCheck bndCheck;
-    private Renderer cubeRend;
+    private Rigidbody _rigid;
+    private BoundsCheck _bndCheck;
+    private Renderer _cubeRend;
 
     void Awake()
     {
         cube = transform.Find("Cube").gameObject; // find the cube reference
         // find the textmesh and other components
         letter = GetComponent<TextMesh>();
-        rigid = GetComponent<Rigidbody>();
-        bndCheck = GetComponent<BoundsCheck>();
-        cubeRend = cube.GetComponent<Renderer>();
+        _rigid = GetComponent<Rigidbody>();
+        _bndCheck = GetComponent<BoundsCheck>();
+        _cubeRend = cube.GetComponent<Renderer>();
 
         // set random velocity
         Vector3 vel = Random.onUnitSphere; // get random xyz velocity, 
@@ -37,7 +37,7 @@ public class PowerUp : MonoBehaviour
         vel.Normalize(); // normalize vector 3 makes it length 1m
 
         vel *= Random.Range(driftMinMax.x, driftMinMax.y);
-        rigid.velocity = vel;
+        _rigid.velocity = vel;
 
         // set the rotation of this gameobject to r 0,0,0
         transform.rotation = Quaternion.identity;// identity means equals rotation
@@ -67,9 +67,9 @@ public class PowerUp : MonoBehaviour
 
         if (u > 0)
         {
-            Color c = cubeRend.material.color;
+            Color c = _cubeRend.material.color;
             c.a = 1f - u;
-            cubeRend.material.color = c;
+            _cubeRend.material.color = c;
 
             //fade the letter, not as much
             c = letter.color;
@@ -77,7 +77,7 @@ public class PowerUp : MonoBehaviour
             letter.color = c;
         }
 
-        if (!bndCheck.isOnScreen) // if the power up drifts off the screen
+        if (!_bndCheck.isOnScreen) // if the power up drifts off the screen
         {
             Destroy(gameObject);
         }
@@ -87,7 +87,7 @@ public class PowerUp : MonoBehaviour
     {
         // get weapon defintion from main
         WeaponDefintion def = Main.GetWeaponDefintion(wt);
-        cubeRend.material.color = def.projectileColor; // set the colour
+        _cubeRend.material.color = def.projectileColor; // set the colour
         type = wt; // set the type
         letter.text = def.letter; // set the letter
     }

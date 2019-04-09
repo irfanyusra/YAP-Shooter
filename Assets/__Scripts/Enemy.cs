@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public bool enemy1Direction = true;
     protected BoundsCheck bndCheck;
 
-    private static int numEnemiesDestroyed = 0; // static so main can keep track of enemies destroyed
+    private static int _NUM_ENEMIES_DESTROYED = 0; // static so main can keep track of enemies destroyed
 
     Main.WeaponType puType; // type for power up
 
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     public Main.WeaponType[] powerUps = new Main.WeaponType[] { 
     Main.WeaponType.shield, Main.WeaponType.movementSpeed, Main.WeaponType.attackSpeed}; // list of power ups avaiable
 
-    private GameObject lastTriggerGameObject = null;
+    private GameObject _lastTriggerGameObject = null;
 
     [Header("Set Dynamically: Enemy")]
     public Color[] originalColors;
@@ -114,12 +114,12 @@ public class Enemy : MonoBehaviour
     {
         GameObject otherGO = collision.gameObject;
 
-        if (lastTriggerGameObject == otherGO)
+        if (_lastTriggerGameObject == otherGO)
         {
             return;
         }
 
-        lastTriggerGameObject = otherGO;
+        _lastTriggerGameObject = otherGO;
         
         //checking what type of go it is 
         switch (otherGO.tag)
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
                     {
                         Main.MAIN_INSTANCE.blehAs.Play();
                         Destroy(this.gameObject); // destroys the enemy
-                        numEnemiesDestroyed++;
+                        _NUM_ENEMIES_DESTROYED++;
                         Main.MAIN_INSTANCE.currScore += score; // current score increases
                         if (Main.MAIN_INSTANCE.currScore > PlayerPrefs.GetInt("highScore"))
                         {
@@ -150,9 +150,9 @@ public class Enemy : MonoBehaviour
                             Main.MAIN_INSTANCE.SetHighScore();
                         }
                         Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
-                        if (numEnemiesDestroyed >= 10)
+                        if (_NUM_ENEMIES_DESTROYED >= 10)
                         {
-                            numEnemiesDestroyed = 0;
+                            _NUM_ENEMIES_DESTROYED = 0;
                             Main.MAIN_INSTANCE.nextLevel();
                             speed *= 1f + (1f/(Main.MAIN_INSTANCE.level * 2));
                         }

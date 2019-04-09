@@ -14,7 +14,7 @@ public class MeteorScript : MonoBehaviour
 
     protected BoundsCheck bndCheck;
 
-    public static float speed = 3f; // speed
+    public static float SPEED = 3f; // speed
     public bool meteorDir; // direction of the meteor
 
     private void Awake()
@@ -58,10 +58,10 @@ public class MeteorScript : MonoBehaviour
 
         if (meteorDir)
         {
-            tempPos.x += speed * Time.deltaTime;
+            tempPos.x += SPEED * Time.deltaTime;
         } else
         {
-            tempPos.x += speed * Time.deltaTime * -1;
+            tempPos.x += SPEED * Time.deltaTime * -1;
         }
         pos = tempPos;
     }

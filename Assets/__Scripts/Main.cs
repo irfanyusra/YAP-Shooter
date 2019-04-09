@@ -27,7 +27,7 @@ public class Main : MonoBehaviour
     public Text highScoreText;
     public Text currScoreText;
     public Text currLevelPrefab;
-    private Text currLevelText;
+    private Text _currLevelText;
     //static so that the high score can be kept
     public int highScore = 0;
     // pulic so that enemy can access it when it gets destroyed
@@ -204,9 +204,9 @@ public class Main : MonoBehaviour
 
     public void ShowLevelText() // show level text
     {
-        currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(420, 300, 0), Quaternion.identity);
+        _currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(420, 300, 0), Quaternion.identity);
         SetCurrLevel();
-        currLevelText.transform.SetParent(canvas.transform);
+        _currLevelText.transform.SetParent(canvas.transform);
 
     }
 
@@ -250,7 +250,7 @@ public class Main : MonoBehaviour
     // set current level
     public void SetCurrLevel()
     {
-        currLevelText.text = "LEVEL " + level;
+        _currLevelText.text = "LEVEL " + level;
     }
 
     //get the weapon definition in the weapon dictionary
