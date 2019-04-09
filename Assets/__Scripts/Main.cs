@@ -41,6 +41,7 @@ public class Main : MonoBehaviour
     // instance of the bounds check class
     private BoundsCheck _bndCheck;
 
+    // set up audio files
     public AudioClip backgroundMusicAC;
     public AudioSource backgroundMusicAS;
 
@@ -65,7 +66,7 @@ public class Main : MonoBehaviour
     public AudioClip boomAc;
     public AudioSource boomAs;
 
-    public enum WeaponType
+    public enum WeaponType // weapon types
     {
         none, 
         gun,
@@ -83,7 +84,7 @@ public class Main : MonoBehaviour
         SetHighScore();
         SetCurrScore();
 
-        ShowLevelText();
+        ShowLevelText(); // calls the function to show level
 
         //sets the main instance to this
         MAIN_INSTANCE = this;
@@ -101,9 +102,11 @@ public class Main : MonoBehaviour
             WEAP_DICT[def.type] = def;
         }
 
+        // plays the background music
         backgroundMusicAS.clip = backgroundMusicAC;
         backgroundMusicAS.Play();
 
+        // sets up all the other clips and sources (linking them)
         pppAs.clip = pppAc;
         yapAs.clip = yapAc;
         powerUpAs.clip = powerUpAc;
@@ -165,21 +168,22 @@ public class Main : MonoBehaviour
     // restart function
     public void Restart()
     {
-        SetHighScore();
-        enemySpawnPerSecond = 0.5f;
+        //SetHighScore();
+        // resets to base values (level changed values)
+        enemySpawnPerSecond = 0.5f; 
         Enemy.speed = 10f;
         // reload _Scene_0 to restart game
         SceneManager.LoadScene("_Scene_0");
     }
 
-    public void nukeBlastImage()
+    public void nukeBlastImage() // handles nuke blast and fade effect
     {
         Image nuclearBlast = Instantiate<Image>(NuclearBlast, new Vector3(480, 700, 0), Quaternion.identity);
         nuclearBlast.transform.SetParent(canvas.transform);
         nuclearBlast.CrossFadeAlpha(0f, 1f, false);
     }
 
-    public void ShowLevelText()
+    public void ShowLevelText() // show level text
     {
         currLevelText = Instantiate<Text>(currLevelPrefab, new Vector3(420, 300, 0), Quaternion.identity);
         SetCurrLevel();
@@ -187,7 +191,7 @@ public class Main : MonoBehaviour
 
     }
 
-    public void nextLevel()
+    public void nextLevel() // starts next level by increasing the spawn and introducint a meteor
     {
         levelUpAs.Play();
         level++;
@@ -224,6 +228,7 @@ public class Main : MonoBehaviour
         currScoreText.text = "Current Score: " + currScore;
     }
 
+    // set current level
     public void SetCurrLevel()
     {
         currLevelText.text = "LEVEL " + level;

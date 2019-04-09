@@ -4,38 +4,43 @@ using UnityEngine;
 
 public class MeteorScript : MonoBehaviour
 {
-    public float meteorHealth = 100;
+    public float meteorHealth = 100; // health  
 
     public Vector2 rotMinMax = new Vector2(10, 80);
-    public Vector2 driftMinMax = new Vector2(0.25f, 0.25f);
+    //public Vector2 driftMinMax = new Vector2(0.25f, 0.25f);
 
     public GameObject sphere;
-    public Vector3 rotPerSecond;
+    public Vector3 rotPerSecond; // rotations per second
 
     protected BoundsCheck bndCheck;
-    public static float speed = 3f;
-    public bool meteorDir;
+
+    public static float speed = 3f; // speed
+    public bool meteorDir; // direction of the meteor
 
     private void Awake()
     {
         sphere = this.gameObject;
+
+        transform.rotation = Quaternion.identity; // no rotation
+
+        // random rotations
         rotPerSecond = new Vector3(Random.Range(rotMinMax.x, rotMinMax.y),
              Random.Range(rotMinMax.x, rotMinMax.y),
              Random.Range(rotMinMax.x, rotMinMax.y));
 
-        transform.rotation = Quaternion.identity;
-        bndCheck = GetComponent<BoundsCheck>();
-        meteorDir = (Random.value <= 0.5f);
+        bndCheck = GetComponent<BoundsCheck>(); // set up the bnd check
+
+        meteorDir = (Random.value <= 0.5f); // randomly selects the meteor direction
     }
     private void Update()
     {
-        Move();
-        sphere.transform.rotation = Quaternion.Euler(rotPerSecond * Time.time);
-        if (meteorHealth <= 0)
+        Move(); // calls the move function
+        sphere.transform.rotation = Quaternion.Euler(rotPerSecond * Time.time); // rotates the sphere 
+        if (meteorHealth <= 0) // if the health is less than 0, destroy game object
         {
             Destroy(gameObject);
         }
-        if (bndCheck != null)
+        if (bndCheck != null) // if the bnd check is not null, check which direction it spawned from, and destroy object once it crosses other side
         {
             if (meteorDir)
             {
@@ -47,7 +52,7 @@ public class MeteorScript : MonoBehaviour
         }
     }
 
-    public virtual void Move()
+    public virtual void Move() // handles the movement of the meteor
     {
         Vector3 tempPos = pos;
 
@@ -58,11 +63,10 @@ public class MeteorScript : MonoBehaviour
         {
             tempPos.x += speed * Time.deltaTime * -1;
         }
-
         pos = tempPos;
     }
 
-    public Vector3 pos
+    public Vector3 pos // property for position
     {
         get
         {
@@ -74,39 +78,21 @@ public class MeteorScript : MonoBehaviour
         }
     }
 
-    public void damageHealth(int dmg) { meteorHealth -= dmg; }
+    public void damageHealth(int dmg) { meteorHealth -= dmg; } // damage function
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // managing the collisions
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag("Hero")) // if hero -25 health
         {
             meteorHealth -= 25;
             Debug.Log(meteorHealth);
         }
-        else if (other.CompareTag("ProjectileHero"))
+        else if (other.CompareTag("ProjectileHero")) // if projectile hero, find the defintion and do damage
         {
             Projectile p = other.gameObject.GetComponent<Projectile>();
             meteorHealth -= Main.GetWeaponDefintion(p.type).damageOnHit;
             Destroy(other.gameObject);
-
         }
 
   }
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject otherGO = collision.gameObject;
-        if (otherGO.tag == "ProjectileHero")
-        {
-            Debug.Log("HITMEBABYONEMORETIME");
-            Projectile p = otherGO.GetComponent<Projectile>();
-            Destroy(otherGO);
-            meteorHealth -= Main.GetWeaponDefintion(p.type).damageOnHit;
-            if (meteorHealth <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-
-        }
-
-    }
 }

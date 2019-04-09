@@ -27,8 +27,6 @@ public class Weapon : MonoBehaviour
     public float lastShotTime;
     private Renderer _collarRend;
 
-   
-
     void Start()
     {
         //Main.MAIN_INSTANCE.pppAS.clip = Main.MAIN_INSTANCE.pppAc;

@@ -58,6 +58,7 @@ public class PowerUp : MonoBehaviour
         float u = (Time.time - (birthTime + lifetime)) / fadetime;
         // for lifetime seconds, u will be <= 0. then it will transition to 1 over the course of the fadetime seconds
 
+        // handles the fade effect
         if (u>= 1)
         {
             Destroy(this.gameObject);
@@ -91,7 +92,7 @@ public class PowerUp : MonoBehaviour
         letter.text = def.letter; // set the letter
     }
 
-    public void AbsorbedBy(GameObject target)
+    public void AbsorbedBy(GameObject target) // destroys this game object when absorbed
     { //for when hero class collects this powerup
         Destroy(this.gameObject);
     }

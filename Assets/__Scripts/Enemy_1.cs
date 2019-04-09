@@ -6,7 +6,7 @@ public class Enemy_1 : Enemy
 {
     private void Start()
     {
-        health = 10;
+        health = 15;
         score = 75;
     }
     public override void Move()

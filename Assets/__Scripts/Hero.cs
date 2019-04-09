@@ -64,31 +64,31 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X)) // if the keycode of x is pressed it will attempt to call launch nuke
         {
             launchNuke();
         }
     }
 
-    public void launchNuke()
+    public void launchNuke() // launch nuke handles the destruction of enemies
     {
-        if (activeNuke)
+        if (activeNuke) // will only activate if there is a nuke
         {
-            Main.MAIN_INSTANCE.boomAs.Play();
-            Main.MAIN_INSTANCE.nukeBlastImage();
+            Main.MAIN_INSTANCE.boomAs.Play(); // play sound
+            Main.MAIN_INSTANCE.nukeBlastImage(); // apply image affect
             GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-            foreach (GameObject go in allObjects)
+            foreach (GameObject go in allObjects) // uses the hierachy to destroy enemies
             {
                 if (go.CompareTag("Enemy") || go.CompareTag("Enemy_2"))
                 {
                     Destroy(go);
                 }
             }
-            activeNuke = false;
+            activeNuke = false; // sets the nuke active to false
         }
     }
 
-    public void shieldDamaged()
+    public void shieldDamaged() // function to take off shield
     {
         shieldLevel--;
         Main.MAIN_INSTANCE.ouchAs.Play();
@@ -117,11 +117,11 @@ public class Hero : MonoBehaviour
             shieldDamaged();
             Destroy(go);
         }
-        else if (go.tag == "PowerUp")
+        else if (go.tag == "PowerUp") // if power up absorb
         {
             AbsorbPowerUp(go);
         }
-        else if (go.tag == "Meteor")
+        else if (go.tag == "Meteor") // if meteor damage shield and return last object after delay
         {
             shieldDamaged();
             StartCoroutine(ExecuteAfterTime(2));
@@ -142,13 +142,13 @@ public class Hero : MonoBehaviour
         
     }
 
-    public void AbsorbPowerUp(GameObject go)
+    public void AbsorbPowerUp(GameObject go) // absorbs the power up
     {
         Main.MAIN_INSTANCE.powerUpAs.Play();
         PowerUp pu = go.GetComponent<PowerUp>();
         switch (pu.type)
         {
-            case Main.WeaponType.shield:
+            case Main.WeaponType.shield: // depending on which level the shield is do nothing or add 1
                 if (shieldLevel == 4)
                 {
                     shieldLevel = 4;
@@ -159,27 +159,27 @@ public class Hero : MonoBehaviour
                 }
 
                 break;
-            case Main.WeaponType.movementSpeed:
+            case Main.WeaponType.movementSpeed: // if movement speed add 10
                 speed += 10;
                 break;
-            case Main.WeaponType.attackSpeed:
+            case Main.WeaponType.attackSpeed: // delay between shots decrease by percentage but only to a point 
                 if (Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots > 0.25f)
                 {
                     Main.GetWeaponDefintion(Main.WeaponType.gun).delayBetweenShots *= 0.7f;
                     Main.GetWeaponDefintion(Main.WeaponType.blaster).delayBetweenShots *= 0.7f;
                 }
                 break;
-            case Main.WeaponType.nuke:
+            case Main.WeaponType.nuke: // if nuke is picked up set active nuke to true
                 activeNuke = true;
                 break;
             default: // nothing
                 break;
 
         }
-        pu.AbsorbedBy(this.gameObject);
+        pu.AbsorbedBy(this.gameObject);// call the absorbed function to destroy object
     }
 
-    IEnumerator ExecuteAfterTime(float time)
+    IEnumerator ExecuteAfterTime(float time) // used to reset the last trigger go
     {
         _lastTriggerGo = null;
         yield return new WaitForSeconds(time);

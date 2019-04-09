@@ -7,14 +7,13 @@ public class Enemy : MonoBehaviour
 
     //Set in inspector
     public static float speed = 10f;
-    public float fireRate = 0.6f; //seconds per shot
     public float health = 20;
     public int score = 100; //value
     public float showDamageDuration = 0.1f;
     public bool enemy1Direction = true;
     protected BoundsCheck bndCheck;
 
-    private static int numEnemiesDestroyed = 0;
+    private static int numEnemiesDestroyed = 0; // static so main can keep track of enemies destroyed
 
     Main.WeaponType puType; // type for power up
 
@@ -48,7 +47,7 @@ public class Enemy : MonoBehaviour
         float dropChance = 0.5f; // to select if this enemy will have a drop chance
         if (Random.value <= dropChance) // if the the random number is less than or equal to powerupdrop chance it will drop a power up
         {
-            if (Random.value <= 0.2f)
+            if (Random.value <= 0.2f) // adds another probability for nuke
             {
                 puType = Main.WeaponType.nuke;
             }
@@ -63,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        health = 20;
+        health = 25; // sets health and score
         score = 50;
     }
     //position proerty
@@ -104,11 +103,11 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Meteor")
+        if (other.tag == "Meteor") // if the enemy hits meteor, call damage health on it
         {
             other.gameObject.GetComponent<MeteorScript>().damageHealth(20);
             Main.MAIN_INSTANCE.blehAs.Play();
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); // destroys go
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -148,10 +147,9 @@ public class Enemy : MonoBehaviour
                         if (Main.MAIN_INSTANCE.currScore >= PlayerPrefs.GetInt("highScore"))
                         {
                             PlayerPrefs.SetInt("highScore", Main.MAIN_INSTANCE.currScore);
+                            Main.MAIN_INSTANCE.SetHighScore();
                         }
                         Main.MAIN_INSTANCE.SetCurrScore(); // calls to set the current score
-                        Main.MAIN_INSTANCE.SetHighScore();
-
                         if (numEnemiesDestroyed >= 10)
                         {
                             numEnemiesDestroyed = 0;
@@ -160,13 +158,16 @@ public class Enemy : MonoBehaviour
                         }
                         else
                         {
-                            if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed || puType == Main.WeaponType.nuke)
+                            if (puType == Main.WeaponType.shield ||
+                                puType == Main.WeaponType.movementSpeed ||
+                                 puType == Main.WeaponType.attackSpeed ||
+                                 puType == Main.WeaponType.nuke) // checks if the there is a power up on this enemy when it dies and instantiates it
                             {
                                 GameObject go = Instantiate(prefabPowerUp) as GameObject;
                                 PowerUp pu = go.GetComponent<PowerUp>();
                                 pu.SetType(puType);
 
-                                pu.transform.position = this.transform.position;
+                                pu.transform.position = this.transform.position; // set it to the position of the enemy
                             }
                         }
                     }
@@ -179,9 +180,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void ShowDamage()
+    void ShowDamage() // shows the damage on the enemy
     {
-        foreach (Material m in materials)
+        foreach (Material m in materials) // depending if it has a power up adjust colour
         {
             if (puType == Main.WeaponType.shield || puType == Main.WeaponType.movementSpeed || puType == Main.WeaponType.attackSpeed || puType == Main.WeaponType.nuke)
             {
@@ -189,14 +190,14 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                m.color = Color.red;
+                m.color = Color.red; // shows red 
             }
         }
         showingDamage = true;
         damageDoneTime = Time.time + showDamageDuration;
     }
 
-    void UnShowDamage()
+    void UnShowDamage() // show original colour
     {
         for (int i= 0; i < materials.Length; i++)
         {

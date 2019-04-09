@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utils : MonoBehaviour
+public class Utils : MonoBehaviour // utils class for the enemy damage
 {
-    static public Material[] GetAllMaterials(GameObject go)
+    static public Material[] GetAllMaterials(GameObject go) // gets all the materials of a game object
     {
-        Renderer[] rends = go.GetComponentsInChildren<Renderer>();
-        List<Material> mats = new List<Material>();
-        foreach (Renderer rend in rends)
+        Renderer[] rends = go.GetComponentsInChildren<Renderer>(); // includes children
+        List<Material> mats = new List<Material>(); // gets the materials
+        foreach (Renderer rend in rends) // for all the objects get the renderers
         {
             mats.Add(rend.material);
         }

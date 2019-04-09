@@ -18,7 +18,7 @@ public class Enemy_2 : Enemy
     {
         _x0 = pos.x;
         _birthTime = Time.time;
-        health = 5;
+        health = 10;
         score = 100;
     }
 
