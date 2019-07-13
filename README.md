@@ -1,5 +1,5 @@
-# SE2250_Project_yirfan3_achalya_htruon
-YAP Shooter 
+# YAP Shooter 
+
 SpaceSHUMPGame 
 
 
